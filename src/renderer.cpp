@@ -42,11 +42,24 @@ namespace RT_ISICG
 		progressBar.start( height, 50 );
 		chrono.start();
 
-		for ( int j = 0; j < height; j++ )
+		Vec3f color = Vec3f();
+		for ( float j = 0; j < height; j++ )
 		{
-			for ( int i = 0; i < width; i++ )
+			for ( float i = 0; i < width; i++ )
 			{
-				/// TODO !
+				// EXO 1 TP 1 
+				/*color.r = (i / width-1);
+				color.g = (j / height-1);
+				p_texture.setPixel( i, j, color );*/
+
+				color.r = ( i / width - 1 );
+				color.g = ( j / height - 1 );
+
+
+				Ray ray = p_camera->generateRay( color.r, color.g );
+
+				p_texture.setPixel( i, j, ( ray.getDirection() + 1.f ) * 0.5f );
+
 			}
 			progressBar.next();
 		}

@@ -17,11 +17,15 @@ namespace RT_ISICG
 						   const float	 p_aspectRatio );
 
 		~PerspectiveCamera() = default;
-
+			
 		inline Ray generateRay( const float p_sx, const float p_sy ) const override
 		{
-			/// TODO !
-			return Ray( Vec3f( 0.f ), Vec3f( 0.f, 0.f, 1.f ) );
+			Vec3f viewPortHit = Vec3f( _viewportTopLeftCorner + (_viewportU * p_sx ) - ( _viewportV * p_sy ) );
+
+			Vec3f dir = glm::normalize(
+				Vec3f( viewPortHit.x - _position.x, viewPortHit.y - _position.y, viewPortHit.z - _position.z ) );
+			
+			return Ray( _position, dir );
 		}
 
 	  private:
