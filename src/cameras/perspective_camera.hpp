@@ -22,8 +22,7 @@ namespace RT_ISICG
 		{
 			Vec3f viewPortHit = Vec3f( _viewportTopLeftCorner + (_viewportU * p_sx ) - ( _viewportV * p_sy ) );
 
-			Vec3f dir = glm::normalize(
-				Vec3f( viewPortHit.x - _position.x, viewPortHit.y - _position.y, viewPortHit.z - _position.z ) );
+			Vec3f dir = glm::normalize(viewPortHit - _position );
 			
 			return Ray( _position, dir );
 		}

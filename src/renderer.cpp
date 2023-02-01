@@ -52,9 +52,8 @@ namespace RT_ISICG
 				color.g = (j / height-1);
 				p_texture.setPixel( i, j, color );*/
 
-				color.r = ( i / width - 1 );
-				color.g = ( j / height - 1 );
-
+				color.r = ( (i + 0.5) / (width - 1) );
+				color.g = ( (j + 0.5) / (height - 1) );
 
 				Ray ray = p_camera->generateRay( color.r, color.g );
 
