@@ -47,18 +47,17 @@ namespace RT_ISICG
 		{
 			for ( float i = 0; i < width; i++ )
 			{
-				// EXO 1 TP 1 
-				/*color.r = (i / width-1);
-				color.g = (j / height-1);
-				p_texture.setPixel( i, j, color );*/
+				float p_sx = ( i / (width - 1) );
+				float p_sy = ( j / ( height - 1 ) );
+				
+				
+				float p_tmin=0;
+				float p_tmax = 100;
 
-				color.r = ( (i + 0.5) / (width - 1) );
-				color.g = ( (j + 0.5) / (height - 1) );
-
-				Ray ray = p_camera->generateRay( color.r, color.g );
-
-				p_texture.setPixel( i, j, ( ray.getDirection() + 1.f ) * 0.5f );
-
+				HitRecord hitRecord;
+				p_texture.setPixel(
+					i, j, _integrator->Li( p_scene, p_camera->generateRay( p_sx, p_sy ), p_tmin, p_tmax ) );
+				
 			}
 			progressBar.next();
 		}

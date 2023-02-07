@@ -12,7 +12,7 @@ namespace RT_ISICG
 		virtual ~SphereGeometry() = default;
 
 		SphereGeometry( const Vec3f & p_center, const float p_radius ) : _center( p_center ), _radius( p_radius ) {}
-
+		 
 		inline const Vec3f & getCenter() const { return _center; }
 		inline const float	 getRadius() const { return _radius; }
 
@@ -20,8 +20,8 @@ namespace RT_ISICG
 
 		inline Vec3f computeNormal( const Vec3f & p_point ) const
 		{
-			/// TODO !
-			return Vec3f( 1.f );
+			return Vec3f( p_point - _center / length( p_point - _center ) );
+			
 		}
 
 	  private:
