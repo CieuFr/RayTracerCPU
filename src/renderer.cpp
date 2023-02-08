@@ -47,17 +47,23 @@ namespace RT_ISICG
 		{
 			for ( float i = 0; i < width; i++ )
 			{
-				float p_sx = ( i / (width - 1) );
-				float p_sy = ( j / ( height - 1 ) );
-				
-				
+
 				float p_tmin=0;
 				float p_tmax = 100;
-
-				HitRecord hitRecord;
-				p_texture.setPixel(
-					i, j, _integrator->Li( p_scene, p_camera->generateRay( p_sx, p_sy ), p_tmin, p_tmax ) );
+				Vec3f colorMean = Vec3f( 0 );
 				
+				for ( unsigned int k = 0; k < _nbPixelSamples; k++ ) {
+					float xOffSet = randomFloat();
+					float yOffSet = randomFloat();
+					float p_sx	  = (( i + xOffSet) / (width - 1));
+					float p_sy	  = (( j + yOffSet) / (height - 1));
+					colorMean += _integrator->Li( p_scene, p_camera->generateRay( p_sx, p_sy ), p_tmin, p_tmax );
+				}
+
+				colorMean = colorMean / (float)_nbPixelSamples;
+
+				p_texture.setPixel(i, j, colorMean );
+	
 			}
 			progressBar.next();
 		}

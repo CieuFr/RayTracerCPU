@@ -20,7 +20,7 @@ namespace RT_ISICG
 
 		inline Vec3f computeNormal( const Vec3f & p_point ) const
 		{
-			return Vec3f( p_point - _center / length( p_point - _center ) );
+			return Vec3f( normalize( p_point - _center ) );
 			
 		}
 
