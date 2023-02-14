@@ -9,6 +9,8 @@ namespace RT_ISICG
 	{
 	  public:
 		BaseLight( const Vec3f & p_color, const float p_power = 1.f ) : _color( p_color ) {}
+		BaseLight( const Vec3f & p_color,  float &  p_power ) : _color( p_color ), _power(p_power) {}
+
 		virtual ~BaseLight() = default;
 
 		inline const Vec3f & getFlatColor() const { return _color; }
@@ -18,6 +20,7 @@ namespace RT_ISICG
 	  protected:
 		// TODO: give a name, like objects and materials
 		Vec3f _color = WHITE;
+		float _power = 1;
 	};
 
 } // namespace RT_ISICG

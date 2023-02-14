@@ -41,6 +41,8 @@ namespace RT_ISICG
 		_attachMaterialToObject( "Blue", "Sphere1" );
 		_attachMaterialToObject( "Red", "Plane1" );
 
+		// Add Lights 
+		_addLight( new PointLight(Vec3f(1,10,1),Vec3f(1.f) , 100.f));
 	}
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
