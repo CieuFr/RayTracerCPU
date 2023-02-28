@@ -2,20 +2,6 @@
 
 namespace RT_ISICG
 {
-
-		Vec3f _directLighting2( const float		p_cosTheta,
-							const Vec3f		p_color,
-							const LightList p_lightList,
-							const Vec3f		p_point )
-	{
-		Vec3f liColor = Vec3f( 0 );
-		for ( unsigned int i = 0; i < p_lightList.size(); i++ )
-		{
-			liColor += p_color * p_lightList[ i ]->sample( p_point )._radiance * p_cosTheta;
-		}
-		return liColor;
-	}
-
 	Vec3f DirectLightingIntegrator::Li( const Scene & p_scene,
 								 const Ray &   p_ray,
 								 const float   p_tMin,
@@ -27,21 +13,28 @@ namespace RT_ISICG
 			
 		    float cosTheta	   = glm::dot( -p_ray.getDirection(), hitRecord._normal );
 			float maxThetaZero = glm::max( cosTheta, 0.0f );
-			return _directLighting2(
+			/*return _directLighting2(
 				maxThetaZero, hitRecord._object->getMaterial()->getFlatColor(), p_scene.getLights(), hitRecord._point );
+			*/
+			return _directLighting(
+				maxThetaZero, hitRecord._object->getMaterial()->getFlatColor(), p_scene, hitRecord._point );
+		
 		}
 		else { return _backgroundColor; }
 	}
-
+	
 	Vec3f DirectLightingIntegrator::_directLighting( const float	 p_cosTheta,
 													 const Vec3f	 p_color,
-													 const LightList p_lightList,
-													 const Vec3f	 p_point )
+													 const Scene & p_scene,
+													 const Vec3f	 p_point ) const
 	{
+		LightList _lightList = p_scene.getLights();
 		Vec3f liColor = Vec3f( 0 );
-		for ( unsigned int i = 0; i < p_lightList.size(); i++ )
+		
+		for ( BaseLight* light :  p_scene.getLights() ) 
 		{
-			liColor += p_color * p_lightList[ i ]->sample( p_point )._radiance * p_cosTheta;
+
+			liColor += p_color * light->sample( p_point )._radiance * p_cosTheta;
 		}
 		return liColor;
 	}

@@ -1,8 +1,8 @@
 #include "scene.hpp"
 #include "materials/color_material.hpp"
 #include "objects/sphere.hpp"
-#include "objects/plane.hpp"
 #include "objects/triangle_mesh.hpp"
+#include "objects/plane.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -31,7 +31,7 @@ namespace RT_ISICG
 	{
 		// Add objects.
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
-		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f(0.f,1.f,0.f) ) );
+		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		// Add materials.
 		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
@@ -41,8 +41,8 @@ namespace RT_ISICG
 		_attachMaterialToObject( "Blue", "Sphere1" );
 		_attachMaterialToObject( "Red", "Plane1" );
 
-		// Add Lights 
-		_addLight( new PointLight(Vec3f(1,10,1),Vec3f(1.f) , 100.f));
+		// Add Lights
+		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
 	}
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
@@ -108,8 +108,8 @@ namespace RT_ISICG
 				aiString mtlName;
 				mtl->Get( AI_MATKEY_NAME, mtlName );
 
-				//_addMaterial( new PlasticMaterial( std::string( mtlName.C_Str() ), kd, ks, s ) );
-				//_attachMaterialToObject( mtlName.C_Str(), meshName );
+				/*_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
+				_attachMaterialToObject( mtlName.C_Str(), meshName );*/
 			}
 
 			std::cout << "-- [DONE] " << triMesh->getNbTriangles() << " triangles, " << triMesh->getNbVertices()

@@ -16,15 +16,13 @@ namespace RT_ISICG
 		Scene scene;
 		scene.init();
 		
-		Vec3f position = Vec3f( 4, -1, 0 );
-		Vec3f lookAt = Vec3f(-1, -1, 2 );
+		Vec3f position = Vec3f( 0, 0, -2 );
+		Vec3f lookAt = Vec3f(0, 0, 79 );
 		Vec3f up	 = Vec3f( 0, 1, 0 );
 		float fovy	   = 60;
 
 		// Create a perspective camera.
-		//PerspectiveCamera camera( position,lookAt,up,fovy,float( imgWidth ) / imgHeight );
-
-		PerspectiveCamera camera( float( imgWidth ) / imgHeight );
+		PerspectiveCamera camera( position,lookAt,up,fovy,float( imgWidth ) / imgHeight );
 
 		// Create and setup the renderer.
 		Renderer renderer;

@@ -8,17 +8,15 @@ namespace RT_ISICG
 	class PointLight : public BaseLight
 	{
 	  public:
-		PointLight( const Vec3f p_positon, const Vec3f & p_color ) : _position( p_positon ), BaseLight(p_color)
-		{}
-
-		PointLight( const Vec3f p_positon, const Vec3f & p_color, const float & p_power ) : _position( p_positon ), BaseLight(p_color, p_power) {}
+		PointLight( const Vec3f p_positon, const Vec3f p_color, const float p_power = 1.f ): BaseLight( p_color, p_power ), _position( p_positon ) {}
 		
 		~PointLight() = default;
 
-		LightSample BaseLight::sample(const Vec3f& p_point) const {
-			Vec3f AB		= Vec3f( 0.f ) - p_point;
-			float distance	= length( AB );
-			Vec3f direction = normalize( AB );
+		LightSample sample( const Vec3f & p_point ) const 
+		{
+			Vec3f AB		= _position - p_point;
+			float distance	= glm::length( AB );
+			Vec3f direction = glm::normalize( AB );
 			Vec3f radiance	= _color * _power * ( 1 / ( distance * distance ) );
 			float pdf		= 1;
 			return LightSample( direction, distance, radiance, pdf );
