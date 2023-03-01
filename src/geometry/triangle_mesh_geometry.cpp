@@ -13,6 +13,9 @@ namespace RT_ISICG
 												  _refMesh->_vertices[ p_v2 ] - _refMesh->_vertices[ p_v0 ] ) );
 	}
 
+	// cf https://www.youtube.com/watch?v=fK1RPmF_zjQ and
+	// https://cadxfem.org/inf/Fast%20MinimumStorage%20RayTriangle%20Intersection.pdf
+
 	bool TriangleMeshGeometry::intersect( const Ray & p_ray, float & p_t ) const
 	{
 		const Vec3f & o	 = p_ray.getOrigin();

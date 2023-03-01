@@ -28,6 +28,15 @@ namespace RT_ISICG
 		void init();
 		void initTP1();
 		void initTP2();
+		void initTP3();
+		void initTP4();
+		void initTP5();
+		void initTP6();
+		void initTP7();
+		void initProjet();
+
+		std::string DATA_PATH = "./data/";
+
 
 		// Initialization from file.
 		void init( const std::string & p_path ) { throw std::exception( "Not implemented !" ); }
