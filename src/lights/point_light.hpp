@@ -22,6 +22,8 @@ namespace RT_ISICG
 			return LightSample( direction, distance, radiance, pdf );
 		}
 
+		Vec3f getPosition() const { return _position; }
+
 	  protected:
 		// TODO: give a name, like objects and materials
 		Vec3f _position;
