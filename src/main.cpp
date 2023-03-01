@@ -14,21 +14,25 @@ namespace RT_ISICG
 
 		// Create and init scene.
 		Scene scene;
+
+		// You can change de init function to get the different TP eg : initTP1, initTP2, initTP3
+		// Warning there are no lights in TP1
+
 		scene.init();
-		
+
 		Vec3f position = Vec3f( 0, 0, -2 );
-		Vec3f lookAt = Vec3f(0, 0, 79 );
-		Vec3f up	 = Vec3f( 0, 1, 0 );
+		Vec3f lookAt   = Vec3f( 0, 0, 79 );
+		Vec3f up	   = Vec3f( 0, 1, 0 );
 		float fovy	   = 60;
 
 		// Create a perspective camera.
-		PerspectiveCamera camera( position,lookAt,up,fovy,float( imgWidth ) / imgHeight );
+		PerspectiveCamera camera( position, lookAt, up, fovy, float( imgWidth ) / imgHeight );
 
 		// Create and setup the renderer.
 		Renderer renderer;
 		renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
 		renderer.setBackgroundColor( GREY );
-		renderer.setNbPixelSamples( 4);
+		renderer.setNbPixelSamples( 4 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;

@@ -25,10 +25,12 @@ namespace RT_ISICG
 
 		// Hard coded initialization.
 		void init();
+		void initTP1();
+		void initTP2();
 
 		// Initialization from file.
 		void init( const std::string & p_path ) { throw std::exception( "Not implemented !" ); }
-
+		
 		void loadFileTriangleMesh( const std::string & p_name, const std::string & p_path );
 
 		const LightList & getLights() const { return _lightList; }

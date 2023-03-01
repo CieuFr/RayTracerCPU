@@ -1,6 +1,6 @@
 #include "renderer.hpp"
-#include "integrators/ray_cast_integrator.hpp"
 #include "integrators/direct_lighting_integrator.hpp"
+#include "integrators/ray_cast_integrator.hpp"
 #include "utils/console_progress_bar.hpp"
 #include "utils/random.hpp"
 
@@ -53,23 +53,22 @@ namespace RT_ISICG
 		{
 			for ( float i = 0; i < width; i++ )
 			{
-
-				float p_tmin=0;
-				float p_tmax = 100;
+				float p_tmin	= 0;
+				float p_tmax	= 100;
 				Vec3f colorMean = Vec3f( 0 );
-				
-				for ( unsigned int k = 0; k < _nbPixelSamples; k++ ) {
+
+				for ( unsigned int k = 0; k < _nbPixelSamples; k++ )
+				{
 					float xOffSet = randomFloat();
 					float yOffSet = randomFloat();
-					float p_sx	  = (( i + xOffSet) / (width - 1));
-					float p_sy	  = (( j + yOffSet) / (height - 1));
+					float p_sx	  = ( ( i + xOffSet ) / ( width - 1 ) );
+					float p_sy	  = ( ( j + yOffSet ) / ( height - 1 ) );
 					colorMean += _integrator->Li( p_scene, p_camera->generateRay( p_sx, p_sy ), p_tmin, p_tmax );
 				}
 
 				colorMean = colorMean / (float)_nbPixelSamples;
-				colorMean = glm::clamp( colorMean,0.f, 1.f );
-				p_texture.setPixel(i, j, colorMean );
-	
+				colorMean = glm::clamp( colorMean, 0.f, 1.f );
+				p_texture.setPixel( i, j, colorMean );
 			}
 			progressBar.next();
 		}

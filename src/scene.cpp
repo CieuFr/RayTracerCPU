@@ -45,6 +45,39 @@ namespace RT_ISICG
 		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
 	}
 
+	
+	void Scene::initTP1()
+	{
+		// Add objects.
+		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		
+		// Add materials.
+		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
+	
+		// Link objects and materials.
+		_attachMaterialToObject( "Blue", "Sphere1" );
+
+	}
+
+	
+	void Scene::initTP2()
+	{
+		// Add objects.
+		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+
+		// Add materials.
+		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
+		_addMaterial( new ColorMaterial( "Red", RED ) );
+
+		// Link objects and materials.
+		_attachMaterialToObject( "Blue", "Sphere1" );
+		_attachMaterialToObject( "Red", "Plane1" );
+
+		// Add Lights
+		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
+	}
+
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{
 		std::cout << "Loading: " << p_path << std::endl;
