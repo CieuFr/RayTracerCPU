@@ -31,11 +31,15 @@ namespace RT_ISICG
 	void Renderer::setBackgroundColor( const Vec3f & p_color )
 	{
 		if ( _integrator == nullptr ) { std::cout << "[Renderer::setBackgroundColor] Integrator is null" << std::endl; }
-		else
-		{
-			_integrator->setBackgroundColor( p_color );
-		}
+		else { _integrator->setBackgroundColor( p_color ); }
 	}
+
+	void Renderer::setNumberOfLightSamples( const int & p_numberOfLightSamples )
+	{
+		if ( _integrator == nullptr ) { std::cout << "[Renderer::setNumberOfLightSamples] Integrator is null" << std::endl; }
+		else { _integrator->setNbLightSample( p_numberOfLightSamples ); }
+	}
+
 
 	float Renderer::renderImage( const Scene & p_scene, const BaseCamera * p_camera, Texture & p_texture )
 	{
@@ -48,10 +52,10 @@ namespace RT_ISICG
 		progressBar.start( height, 50 );
 		chrono.start();
 
-		Vec3f color = Vec3f();
-		for ( float j = 0; j < height; j++ )
+		#pragma omp parallel for
+		for ( int j = 0; j < height; j++ )
 		{
-			for ( float i = 0; i < width; i++ )
+			for ( int i = 0; i < width; i++ )
 			{
 				float p_tmin	= 0;
 				float p_tmax	= 100;

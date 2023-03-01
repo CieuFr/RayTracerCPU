@@ -18,8 +18,9 @@ namespace RT_ISICG
 
 		Vec3f _directLighting( const Vec3f	 p_color,
 							   const Scene & p_lightList,
-							   const Vec3f		   p_point,
-							   const Vec3f p_normal) const;
+							   const Vec3f	 p_point,
+							   const Vec3f	 p_normal ) const;
+	
 	};
 
 } // namespace RT_ISICG

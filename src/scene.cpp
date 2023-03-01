@@ -1,8 +1,8 @@
 #include "scene.hpp"
 #include "materials/color_material.hpp"
+#include "objects/plane.hpp"
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
-#include "objects/plane.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -42,24 +42,21 @@ namespace RT_ISICG
 		_attachMaterialToObject( "Red", "Plane1" );
 
 		// Add Lights
-		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
+		_addLight( new QuadLight( Vec3f( 1, 10, 2 ), Vec3f( -2, 0, 0 ), Vec3f( 0, 0, 2 ), Vec3f( 1.f ), 40.f ) );
 	}
 
-	
 	void Scene::initTP1()
 	{
 		// Add objects.
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
-		
+
 		// Add materials.
 		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
-	
+
 		// Link objects and materials.
 		_attachMaterialToObject( "Blue", "Sphere1" );
-
 	}
 
-	
 	void Scene::initTP2()
 	{
 		// Add objects.
@@ -221,10 +218,7 @@ namespace RT_ISICG
 					  << "object \'" << p_objectName << "\' keeps its material \'"
 					  << _objectMap[ p_objectName ]->getMaterial()->getName() << "\'" << std::endl;
 		}
-		else
-		{
-			_objectMap[ p_objectName ]->setMaterial( _materialMap[ p_materialName ] );
-		}
+		else { _objectMap[ p_objectName ]->setMaterial( _materialMap[ p_materialName ] ); }
 	}
 
 } // namespace RT_ISICG

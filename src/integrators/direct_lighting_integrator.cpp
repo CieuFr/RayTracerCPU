@@ -26,19 +26,32 @@ namespace RT_ISICG
 	{
 		Vec3f liColor = Vec3f( 0 );
 
+
+
 		for ( BaseLight * light : p_scene.getLights() )
 		{
-			LightSample lightSample = light->sample( p_point );
-			Ray			shadowRay	= Ray( p_point, lightSample._direction );
-			shadowRay.offset( p_normal );
-
-			float cosTheta	   = glm::dot( lightSample._direction, p_normal );
-			float maxThetaZero = glm::max( cosTheta, 0.0f );
-
-			if ( !p_scene.intersectAny( shadowRay, 0, lightSample._distance ) )
-			{
-				liColor += p_color * lightSample._radiance * maxThetaZero;
+			int numberOfShadowRays = 1;
+			if ( light->getIsSurface() ) { 
+				numberOfShadowRays = _nbLightSamples;
 			}
+
+			for ( int i = 0; i < numberOfShadowRays; i++ )
+			{
+				LightSample lightSample = light->sample( p_point );
+				Ray			shadowRay	= Ray( p_point, lightSample._direction );
+				shadowRay.offset( p_normal );
+
+				float cosTheta	   = glm::dot( lightSample._direction, p_normal );
+				float maxThetaZero = glm::max( cosTheta, 0.0f );
+
+				if ( !p_scene.intersectAny( shadowRay, 0, lightSample._distance ) )
+				{
+					liColor += p_color * lightSample._radiance * maxThetaZero;
+				}
+			}
+
+			liColor /= numberOfShadowRays;
+			
 		}
 		return liColor;
 	}

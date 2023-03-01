@@ -32,7 +32,12 @@ namespace RT_ISICG
 		Renderer renderer;
 		renderer.setIntegrator( IntegratorType::DIRECT_LIGHTING );
 		renderer.setBackgroundColor( GREY );
-		renderer.setNbPixelSamples( 4 );
+
+		// Antialiasing, put the value to 1 to disable
+		renderer.setNbPixelSamples( 16 );
+
+		// For suface light, otherwise comment the line
+		renderer.setNumberOfLightSamples( 16 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;

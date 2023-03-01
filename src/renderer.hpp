@@ -15,8 +15,11 @@ namespace RT_ISICG
 		Renderer();
 		~Renderer() { delete _integrator; }
 
-		void setIntegrator( const IntegratorType p_integratorType );
-		void setBackgroundColor( const Vec3f & p_color );
+		void			 setIntegrator( const IntegratorType p_integratorType );
+		BaseIntegrator * getIntegrator() { return _integrator; }
+		void			 setBackgroundColor( const Vec3f & p_color );
+		void			 setNumberOfLightSamples( const int & p_numberOfLightSamples );
+
 
 		inline void setNbPixelSamples( const int p_nbPixelSamples ) { _nbPixelSamples = p_nbPixelSamples; }
 
