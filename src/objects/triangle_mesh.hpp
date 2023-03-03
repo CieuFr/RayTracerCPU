@@ -4,6 +4,7 @@
 #include "base_object.hpp"
 #include "geometry/triangle_mesh_geometry.hpp"
 #include <vector>
+#include "aabb.hpp"
 
 namespace RT_ISICG
 {
@@ -25,6 +26,7 @@ namespace RT_ISICG
 		};
 		inline void addVertex( const float p_x, const float p_y, const float p_z )
 		{
+			_aabb.extend( Vec3f( p_x, p_y, p_z ) );
 			_vertices.emplace_back( p_x, p_y, p_z );
 		}
 		inline void addNormal( const float p_x, const float p_y, const float p_z )
@@ -43,6 +45,7 @@ namespace RT_ISICG
 		bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
 
 	  private:
+		AABB							  _aabb;
 		std::vector<Vec3f>				  _vertices;
 		std::vector<Vec3f>				  _normals;
 		std::vector<Vec2f>				  _uvs;

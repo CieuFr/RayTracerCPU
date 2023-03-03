@@ -20,7 +20,7 @@ namespace RT_ISICG
 
 		scene.init();
 
-		Vec3f position = Vec3f( 0, 0, -2 );
+		Vec3f position = Vec3f( 0, 2, -7);
 		Vec3f lookAt   = Vec3f( 0, 0, 79 );
 		Vec3f up	   = Vec3f( 0, 1, 0 );
 		float fovy	   = 60;
@@ -34,10 +34,10 @@ namespace RT_ISICG
 		renderer.setBackgroundColor( GREY );
 
 		// Antialiasing, put the value to 1 to disable
-		renderer.setNbPixelSamples( 16 );
+		renderer.setNbPixelSamples( 1 );
 
 		// For suface light, otherwise comment the line
-		renderer.setNumberOfLightSamples( 16 );
+		renderer.setNumberOfLightSamples( 1 );
 
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;

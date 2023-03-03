@@ -96,8 +96,8 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// = = = = = = = = = Add objects . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// = = = = = = = = = = = = = = = = = = = = = = = = = OBJ .
-		loadFileTriangleMesh( "UVsphere", DATA_PATH + "uvsphere.obj" );
-		_attachMaterialToObject( "CyanColor", "UVsphere_defaultobject" );
+		loadFileTriangleMesh( "Bunny", DATA_PATH + "Bunny.obj" );
+		_attachMaterialToObject( "CyanColor", "Bunny" );
 		// Pseudo Cornell box made with infinite planes .
 		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 		_attachMaterialToObject( "GreyColor", "PlaneGround" );
@@ -116,6 +116,9 @@ namespace RT_ISICG
 		// = = = = = = = = = = = = = = = = = = = = = = = = =
 		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
 	}
+
+
+
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{
@@ -180,8 +183,8 @@ namespace RT_ISICG
 				aiString mtlName;
 				mtl->Get( AI_MATKEY_NAME, mtlName );
 
-				/*_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
-				_attachMaterialToObject( mtlName.C_Str(), meshName );*/
+				_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
+				_attachMaterialToObject( mtlName.C_Str(), meshName );
 			}
 
 			std::cout << "-- [DONE] " << triMesh->getNbTriangles() << " triangles, " << triMesh->getNbVertices()
