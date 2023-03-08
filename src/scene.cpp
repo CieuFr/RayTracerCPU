@@ -81,11 +81,8 @@ namespace RT_ISICG
 
 	void Scene::init()
 	{
-		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		// = = = = = = = = =
 		// Add materials .
-		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		// = = = = = = = = =
+
 		_addMaterial( new ColorMaterial( "RedColor", RED ) );
 		_addMaterial( new ColorMaterial( "GreenColor", GREEN ) );
 		_addMaterial( new ColorMaterial( "BlueColor", BLUE ) );
@@ -93,11 +90,9 @@ namespace RT_ISICG
 		_addMaterial( new ColorMaterial( "MagentaColor", MAGENTA ) );
 		_addMaterial( new ColorMaterial( "YellowColor", YELLOW ) );
 		_addMaterial( new ColorMaterial( "CyanColor", CYAN ) );
-		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// = = = = = = = = = Add objects . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		// = = = = = = = = = = = = = = = = = = = = = = = = = OBJ .
 		loadFileTriangleMesh( "Bunny", DATA_PATH + "Bunny.obj" );
-		_attachMaterialToObject( "CyanColor", "Bunny" );
+		_attachMaterialToObject( "CyanColor", "Bunny_defaultobject" );
 		// Pseudo Cornell box made with infinite planes .
 		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 		_attachMaterialToObject( "GreyColor", "PlaneGround" );
@@ -111,9 +106,7 @@ namespace RT_ISICG
 		_attachMaterialToObject( "MagentaColor", "PlaneFront" );
 		_addObject( new Plane( "PlaneRear", Vec3f( 0.f, 0.f, -10.f ), Vec3f( 0.f, 0.f, 1.f ) ) );
 		_attachMaterialToObject( "YellowColor", "PlaneRear" );
-		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		// = = = = = = = = = Add lights . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		// = = = = = = = = = = = = = = = = = = = = = = = = =
 		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
 	}
 

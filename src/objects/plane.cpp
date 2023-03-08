@@ -26,7 +26,6 @@ namespace RT_ISICG
 	{
 		float t;
 
-		
 		if ( _geometry.intersect( p_ray, t ) )
 		{
 			if ( t < p_tMin || t > p_tMax ) { return false; } // not in range

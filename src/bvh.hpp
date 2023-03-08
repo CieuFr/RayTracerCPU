@@ -4,6 +4,7 @@
 #include "aabb.hpp"
 #include "hit_record.hpp"
 #include <vector>
+#include <algorithm>
 
 namespace RT_ISICG
 {

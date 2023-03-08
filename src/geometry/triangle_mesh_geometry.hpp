@@ -2,6 +2,7 @@
 #define __RT_ISICG_TRIANGLE_GEOMETRY__
 
 #include "base_geometry.hpp"
+#include "aabb.hpp"
 
 namespace RT_ISICG
 {
@@ -21,8 +22,10 @@ namespace RT_ISICG
 		bool intersect( const Ray & p_ray, float & p_t, Vec3f & normal ) const;
 
 		inline const Vec3f & getFaceNormal() const { return _faceNormal; }
+		inline const AABB & getAABB() const { return _aabb; }
 
 	  private:
+		AABB		   _aabb;
 		MeshTriangle * _refMesh;
 		union
 		{
@@ -33,10 +36,10 @@ namespace RT_ISICG
 			unsigned int _v[ 3 ] = { 0, 0, 0 };
 		};
 
-		bool _testCulling = false;
+		bool  _testCulling = false;
 		float _epsilon	   = 0.001f;
 
-		Vec3f _faceNormal ;
+		Vec3f _faceNormal;
 	};
 } // namespace RT_ISICG
 
