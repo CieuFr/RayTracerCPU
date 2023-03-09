@@ -45,7 +45,7 @@ namespace RT_ISICG
 			if ( v < 0 || u + v > det ) return false;
 
 			t		= glm::dot( edge2, qvec );
-			inv_det = 1 / det;
+			inv_det = 1.f / det;
 			t *= inv_det;
 			u *= inv_det;
 			v *= inv_det;
@@ -53,7 +53,7 @@ namespace RT_ISICG
 		else
 		{
 			if ( det > -_epsilon && det < _epsilon ) return 0;
-			inv_det = 1 / det;
+			inv_det = 1.f / det;
 			tvec	= o - v0;
 			u		= glm::dot( tvec, pvec ) * inv_det;
 			if ( u < 0 || u > 1 ) return false;

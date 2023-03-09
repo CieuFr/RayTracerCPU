@@ -37,7 +37,7 @@ namespace RT_ISICG
 		};
 
 		bool  _testCulling = false;
-		float _epsilon	   = 0.001f;
+		float _epsilon	   = FLT_EPSILON;
 
 		Vec3f _faceNormal;
 	};
