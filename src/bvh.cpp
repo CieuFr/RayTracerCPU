@@ -42,36 +42,27 @@ namespace RT_ISICG
 						 const unsigned int p_lastTriangleId,
 						 const unsigned int p_depth )
 	{
-		/*for ( size_t i = p_firstTriangleId; i <= p_lastTriangleId; i++ )
+		for ( size_t i = p_firstTriangleId; i <= p_lastTriangleId; i++ )
 		{
 			p_node->_aabb.extend( _triangles->at( i ).getAABB() );
 		}
 
 		if ( !( ( p_depth >= _maxDepth ) || ( ( p_lastTriangleId - p_firstTriangleId ) <= _maxTrianglesPerLeaf ) ) )
 		{
-			Vec3f axe = p_node->_aabb.largestAxis();
+			float axe	 = p_node->_aabb.largestAxis();
 			Vec3f centre = p_node->_aabb.centroid();
 
-			float _milieu = centre[axe];
+			float _milieu = centre[ axe ];
 
 			std::vector<TriangleMeshGeometry>::iterator it;
-			it = std::partition( _triangles->begin() + p_first,
-								 _triangles->begin() + p_last,
-								 [ _milieu ]( const TriangleMeshGeometry & triangle )
-								 { return isBehindAxis( triangle, _milieu ); } );
-			it - begin 
-		 size_t index = std::distance( _triangles.begin(), it );
-			_buildRec( p_node->_left, p_firstTriangleId, , p_depth + 1 );
-			_buildRec( p_node->_right,, p_lastTriangleId, p_depth + 1 );*/
-
-		
-
-		/*axePartition = plus grand axe de aabb
-		milieu = centre de axePartition
-		idPartition	= <partition( axePartition, milieu )>
-		constr_rec_BVH( noeud.gauche, idPremierTri, idPartition )
-		constr_rec_BVH( noeud.droit, idPartition, idDernierTri )*/
-		/// TODO
+			it			 = std::partition( _triangles->begin() + p_firstTriangleId,
+								   _triangles->begin() + p_lastTriangleId,
+								   [ _milieu, axe ]( const TriangleMeshGeometry & triangle )
+								   { return triangle.getAABB().centroid()[ axe ] < _milieu; } );
+			int cutIndex = it - _triangles->begin() + p_firstTriangleId;
+			_buildRec( p_node->_left, p_firstTriangleId, cutIndex, p_depth + 1 );
+			_buildRec( p_node->_right, cutIndex, p_lastTriangleId, p_depth + 1 );
+		}
 	}
 
 	bool BVH::_intersectRec( const BVHNode * p_node,
