@@ -39,6 +39,8 @@ namespace RT_ISICG
 		// For suface light, otherwise comment the line
 		renderer.setNumberOfLightSamples( 1 );
 
+	
+
 		// Launch rendering.
 		std::cout << "Rendering..." << std::endl;
 		std::cout << "- Image size: " << imgWidth << "x" << imgHeight << std::endl;

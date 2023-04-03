@@ -5,6 +5,7 @@
 #include "base_object.hpp"
 #include "geometry/triangle_mesh_geometry.hpp"
 #include <vector>
+#include "bvh.hpp"
 
 namespace RT_ISICG
 {
@@ -14,8 +15,9 @@ namespace RT_ISICG
 
 	  public:
 		AABB _aabb;
+		BVH	 _bvh;
 		MeshTriangle() = delete;
-		MeshTriangle( const std::string & p_name ) : BaseObject( p_name ) {}
+		MeshTriangle( const std::string & p_name ) : BaseObject( p_name ) { }
 		virtual ~MeshTriangle() = default;
 
 		const size_t getNbTriangles() const { return _triangles.size(); }
@@ -24,6 +26,7 @@ namespace RT_ISICG
 		inline void addTriangle( const unsigned int p_v0, const unsigned int p_v1, const unsigned int p_v2 )
 		{
 			_triangles.emplace_back( TriangleMeshGeometry( p_v0, p_v1, p_v2, this ) );
+			//_triangles.back().getAABB().extend( Vec3f(p_v0, p_v1, p_v2) );
 		};
 		inline void addVertex( const float p_x, const float p_y, const float p_z )
 		{
@@ -44,6 +47,8 @@ namespace RT_ISICG
 
 		// Check for any intersection between p_tMin and p_tMax.
 		bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
+
+		inline void buildMeshBVH() { _bvh.build( &_triangles ); };
 
 	  private:
 		std::vector<Vec3f>				  _vertices;

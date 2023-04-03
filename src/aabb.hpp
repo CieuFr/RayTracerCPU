@@ -32,10 +32,13 @@ namespace RT_ISICG
 		// Extends the AABB with another AABB
 		inline void extend( const AABB & p_aabb )
 		{
-			if ( _min.x > p_aabb._min.x ) { _min.x = p_aabb._min.x; }
+			if ( _min.x > p_aabb._min.x ) {_min.x = p_aabb._min.x; }
 			if ( _min.y > p_aabb._min.y ) { _min.y = p_aabb._min.y; }
+			if ( _min.z > p_aabb._min.z ) { _min.z = p_aabb._min.z; }
+			
 			if ( _max.x < p_aabb._max.x ) { _max.x = p_aabb._max.x; }
 			if ( _max.y < p_aabb._max.y ) { _max.y = p_aabb._max.y; }
+			if ( _max.z < p_aabb._max.z ) { _max.z = p_aabb._max.z; }
 		}
 
 		// Returns the AABB diagonal vector.

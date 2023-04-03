@@ -43,7 +43,37 @@ namespace RT_ISICG
 		// Add Lights
 		_addLight( new QuadLight( Vec3f( 1, 10, 2 ), Vec3f( -2, 0, 0 ), Vec3f( 0, 0, 2 ), Vec3f( 1.f ), 40.f ) );
 	}
-	void Scene::initTP4() {}
+	void Scene::initTP4()
+	{
+		_addMaterial( new ColorMaterial( "RedColor", RED ) );
+		_addMaterial( new ColorMaterial( "GreenColor", GREEN ) );
+		_addMaterial( new ColorMaterial( "BlueColor", BLUE ) );
+		_addMaterial( new ColorMaterial( "GreyColor", GREY ) );
+		_addMaterial( new ColorMaterial( "MagentaColor", MAGENTA ) );
+		_addMaterial( new ColorMaterial( "YellowColor", YELLOW ) );
+		_addMaterial( new ColorMaterial( "CyanColor", CYAN ) );
+		// = = = = = = = = = Add objects . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		loadFileTriangleMesh( "Bunny", DATA_PATH + "Bunny.obj" );
+		_attachMaterialToObject( "CyanColor", "Bunny_defaultobject" );
+		// Pseudo Cornell box made with infinite planes .
+		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_attachMaterialToObject( "GreyColor", "PlaneGround" );
+		_addObject( new Plane( "PlaneLeft", Vec3f( 5.f, 0.f, 0.f ), Vec3f( -1.f, 0.f, 0.f ) ) );
+		_attachMaterialToObject( "RedColor", "PlaneLeft" );
+		_addObject( new Plane( "PlaneCeiling", Vec3f( 0.f, 7.f, 0.f ), Vec3f( 0.f, -1.f, 0.f ) ) );
+		_attachMaterialToObject( "GreenColor", "PlaneCeiling" );
+		_addObject( new Plane( "PlaneRight", Vec3f( -5.f, 0.f, 0.f ), Vec3f( 1.f, 0.f, 0.f ) ) );
+		_attachMaterialToObject( "BlueColor", "PlaneRight" );
+		_addObject( new Plane( "PlaneFront", Vec3f( 0.f, 0.f, 10.f ), Vec3f( 0.f, 0.f, -1.f ) ) );
+		_attachMaterialToObject( "MagentaColor", "PlaneFront" );
+		_addObject( new Plane( "PlaneRear", Vec3f( 0.f, 0.f, -10.f ), Vec3f( 0.f, 0.f, 1.f ) ) );
+		_attachMaterialToObject( "YellowColor", "PlaneRear" );
+		// = = = = = = = = = Add lights . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
+
+
+		
+	}
 	void Scene::initTP5() {}
 	void Scene::initTP6() {}
 	void Scene::initTP7() {}
@@ -79,39 +109,7 @@ namespace RT_ISICG
 		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
 	}
 
-	void Scene::init()
-	{
-		// Add materials .
-
-		_addMaterial( new ColorMaterial( "RedColor", RED ) );
-		_addMaterial( new ColorMaterial( "GreenColor", GREEN ) );
-		_addMaterial( new ColorMaterial( "BlueColor", BLUE ) );
-		_addMaterial( new ColorMaterial( "GreyColor", GREY ) );
-		_addMaterial( new ColorMaterial( "MagentaColor", MAGENTA ) );
-		_addMaterial( new ColorMaterial( "YellowColor", YELLOW ) );
-		_addMaterial( new ColorMaterial( "CyanColor", CYAN ) );
-		// = = = = = = = = = Add objects . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		loadFileTriangleMesh( "Bunny", DATA_PATH + "Bunny.obj" );
-		_attachMaterialToObject( "CyanColor", "Bunny_defaultobject" );
-		// Pseudo Cornell box made with infinite planes .
-		_addObject( new Plane( "PlaneGround", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
-		_attachMaterialToObject( "GreyColor", "PlaneGround" );
-		_addObject( new Plane( "PlaneLeft", Vec3f( 5.f, 0.f, 0.f ), Vec3f( -1.f, 0.f, 0.f ) ) );
-		_attachMaterialToObject( "RedColor", "PlaneLeft" );
-		_addObject( new Plane( "PlaneCeiling", Vec3f( 0.f, 7.f, 0.f ), Vec3f( 0.f, -1.f, 0.f ) ) );
-		_attachMaterialToObject( "GreenColor", "PlaneCeiling" );
-		_addObject( new Plane( "PlaneRight", Vec3f( -5.f, 0.f, 0.f ), Vec3f( 1.f, 0.f, 0.f ) ) );
-		_attachMaterialToObject( "BlueColor", "PlaneRight" );
-		_addObject( new Plane( "PlaneFront", Vec3f( 0.f, 0.f, 10.f ), Vec3f( 0.f, 0.f, -1.f ) ) );
-		_attachMaterialToObject( "MagentaColor", "PlaneFront" );
-		_addObject( new Plane( "PlaneRear", Vec3f( 0.f, 0.f, -10.f ), Vec3f( 0.f, 0.f, 1.f ) ) );
-		_attachMaterialToObject( "YellowColor", "PlaneRear" );
-		// = = = = = = = = = Add lights . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
-	}
-
-
-
+	void Scene::init() { initTP4(); }
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{
@@ -179,12 +177,15 @@ namespace RT_ISICG
 				_addMaterial( new ColorMaterial( std::string( mtlName.C_Str() ), kd ) );
 				_attachMaterialToObject( mtlName.C_Str(), meshName );
 			}
+			//BVH CONSTRUCTION
+			triMesh->buildMeshBVH();
 
 			std::cout << "-- [DONE] " << triMesh->getNbTriangles() << " triangles, " << triMesh->getNbVertices()
 					  << " vertices." << std::endl;
 		}
 		std::cout << "[DONE] " << scene->mNumMeshes << " meshes, " << cptTriangles << " triangles, " << cptVertices
 				  << " vertices." << std::endl;
+		
 	}
 
 	bool Scene::intersect( const Ray & p_ray, const float p_tMin, const float p_tMax, HitRecord & p_hitRecord ) const
@@ -256,7 +257,10 @@ namespace RT_ISICG
 					  << "object \'" << p_objectName << "\' keeps its material \'"
 					  << _objectMap[ p_objectName ]->getMaterial()->getName() << "\'" << std::endl;
 		}
-		else { _objectMap[ p_objectName ]->setMaterial( _materialMap[ p_materialName ] ); }
+		else
+		{
+			_objectMap[ p_objectName ]->setMaterial( _materialMap[ p_materialName ] );
+		}
 	}
 
 } // namespace RT_ISICG

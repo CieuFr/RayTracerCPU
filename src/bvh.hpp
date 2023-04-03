@@ -5,6 +5,7 @@
 #include "hit_record.hpp"
 #include <vector>
 #include <algorithm>
+#include "objects/base_object.hpp"
 
 namespace RT_ISICG
 {
