@@ -26,7 +26,6 @@ namespace RT_ISICG
 		inline void addTriangle( const unsigned int p_v0, const unsigned int p_v1, const unsigned int p_v2 )
 		{
 			_triangles.emplace_back( TriangleMeshGeometry( p_v0, p_v1, p_v2, this ) );
-			//_triangles.back().getAABB().extend( Vec3f(p_v0, p_v1, p_v2) );
 		};
 		inline void addVertex( const float p_x, const float p_y, const float p_z )
 		{

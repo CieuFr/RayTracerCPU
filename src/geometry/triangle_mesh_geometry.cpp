@@ -11,7 +11,10 @@ namespace RT_ISICG
 	{
 		_faceNormal = glm::normalize( glm::cross( _refMesh->_vertices[ p_v1 ] - _refMesh->_vertices[ p_v0 ],
 												  _refMesh->_vertices[ p_v2 ] - _refMesh->_vertices[ p_v0 ] ) );
-		//_aabb.extend( Vec3f( _refMesh->_vertices[ p_v0 ], _refMesh->_vertices[ p_v1 ], _refMesh->_vertices[ p_v2 ] ) );
+		_aabb.extend( Vec3f( _refMesh->_vertices[ p_v0 ] ));
+		_aabb.extend( Vec3f( _refMesh->_vertices[ p_v1 ] ));
+		_aabb.extend( Vec3f( _refMesh->_vertices[ p_v2 ] ));
+
 	}
 
 	// cf https://www.youtube.com/watch?v=fK1RPmF_zjQ and

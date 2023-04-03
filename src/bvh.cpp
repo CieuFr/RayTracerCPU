@@ -16,12 +16,6 @@ namespace RT_ISICG
 		
 		_root = new BVHNode();
 
-		for ( size_t i = 0; i < _triangles->size(); i++ )
-		{
-			_triangles->at( i ).computeAABB();
-			
-		}
-
 		Chrono chr;
 		chr.start();
 
@@ -55,7 +49,7 @@ namespace RT_ISICG
 
 		for ( size_t i = p_firstTriangleId; i <= p_lastTriangleId; i++ )
 		{
-			_triangles->at( i ).computeAABB();
+			
 			p_node->_aabb.extend( _triangles->at( i ).getAABB() );
 		}
 
