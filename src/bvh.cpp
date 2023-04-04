@@ -13,13 +13,13 @@ namespace RT_ISICG
 			throw std::exception( "BVH::build() error: no triangle provided" );
 		}
 		_triangles = p_triangles;
-		
+
 		_root = new BVHNode();
 
 		Chrono chr;
 		chr.start();
 
-		_buildRec( _root, 0, p_triangles->size() - 1, 0 );
+		_buildRec( _root, 0, p_triangles->size(), 0 );
 
 		chr.stop();
 
@@ -28,14 +28,13 @@ namespace RT_ISICG
 
 	bool BVH::intersect( const Ray & p_ray, const float p_tMin, const float p_tMax, HitRecord & p_hitRecord ) const
 	{
-		_intersectRec( _root, p_ray, p_tMin, p_tMax, p_hitRecord );
-		return false;
+		if ( !_root->_aabb.intersect( p_ray, p_tMin, p_tMax ) ) return false;
+		return _intersectRec( _root, p_ray, p_tMin, p_tMax, p_hitRecord );
 	}
 
 	bool BVH::intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const
 	{
-		_intersectAnyRec( _root, p_ray, p_tMin, p_tMax );
-		return false;
+		return _intersectAnyRec( _root, p_ray, p_tMin, p_tMax );
 	}
 
 	bool isBehindAxis( const TriangleMeshGeometry & triangle, Vec3f _milieu ) { return true; }
@@ -45,20 +44,20 @@ namespace RT_ISICG
 						 const unsigned int p_lastTriangleId,
 						 const unsigned int p_depth )
 	{
-		
-
-		for ( size_t i = p_firstTriangleId; i <= p_lastTriangleId; i++ )
+		for ( size_t i = p_firstTriangleId; i < p_lastTriangleId; i++ )
 		{
-			
 			p_node->_aabb.extend( _triangles->at( i ).getAABB() );
 		}
+
+		p_node->_firstTriangleId = p_firstTriangleId;
+		p_node->_lastTriangleId	 = p_lastTriangleId;
 
 		if ( !( ( p_depth >= _maxDepth ) || ( ( p_lastTriangleId - p_firstTriangleId ) <= _maxTrianglesPerLeaf ) ) )
 		{
 			p_node->_left  = new BVHNode();
-			p_node->_right = new BVHNode();	
-			float axe	 = p_node->_aabb.largestAxis();
-			Vec3f centre = p_node->_aabb.centroid();
+			p_node->_right = new BVHNode();
+			float axe	   = p_node->_aabb.largestAxis();
+			Vec3f centre   = p_node->_aabb.centroid();
 
 			float _milieu = centre[ axe ];
 
@@ -81,10 +80,12 @@ namespace RT_ISICG
 	{
 		if ( p_node->isLeaf() )
 		{
-			float  tClosest		 = p_tMax;			   // Hit distance.
+			float tClosest = p_tMax;
+			if ( p_hitRecord._object != nullptr ) { tClosest = p_hitRecord._distance; }
+
 			size_t hitTri		 = _triangles->size(); // Hit triangle id.
 			Vec3f  normalClosest = VEC3F_ZERO;
-			for ( size_t i = p_node->_firstTriangleId; i <= p_node->_lastTriangleId; i++ )
+			for ( size_t i = p_node->_firstTriangleId; i < p_node->_lastTriangleId; i++ )
 			{
 				float t;
 				Vec3f n;
@@ -105,11 +106,7 @@ namespace RT_ISICG
 				p_hitRecord._normal = normalClosest;
 				p_hitRecord.faceNormal( p_ray.getDirection() );
 				p_hitRecord._distance = tClosest;
-				//MeshTriangle * mesh	  = _triangles->at( hitTri ).getRefMesh();
-				//BaseObject *		 pBaseObject = dynamic_cast<BaseObject*>( mesh );
-				// TODO DECOMMENT 
-				//p_hitRecord._object = _triangles->at( hitTri ).getRefMesh();				
-
+				p_hitRecord._object	  = reinterpret_cast<BaseObject *>( _triangles->at( hitTri ).getRefMesh() );
 
 				return true;
 			}
@@ -117,18 +114,20 @@ namespace RT_ISICG
 			return false;
 		}
 
-		bool returnValue = false;
+		bool returnValueLeft  = false;
+		bool returnValueRight = false;
+
 		if ( p_node->_left->_aabb.intersect( p_ray, p_tMin, p_tMax ) )
 		{
-			returnValue = returnValue || _intersectRec( p_node->_left, p_ray, p_tMin, p_tMax, p_hitRecord );
+			returnValueLeft = _intersectRec( p_node->_left, p_ray, p_tMin, p_tMax, p_hitRecord );
 		}
 
 		if ( p_node->_right->_aabb.intersect( p_ray, p_tMin, p_tMax ) )
 		{
-			returnValue = returnValue || _intersectRec( p_node->_right, p_ray, p_tMin, p_tMax, p_hitRecord );
+			returnValueRight = _intersectRec( p_node->_right, p_ray, p_tMin, p_tMax, p_hitRecord );
 		}
 
-		return returnValue;
+		return ( returnValueLeft || returnValueRight );
 	}
 
 	bool BVH::_intersectAnyRec( const BVHNode * p_node,
@@ -136,10 +135,12 @@ namespace RT_ISICG
 								const float		p_tMin,
 								const float		p_tMax ) const
 	{
+		if ( !p_node->_aabb.intersect( p_ray, p_tMin, p_tMax ) ) return false;
+
 		if ( p_node->isLeaf() )
 		{
 			Vec3f normal;
-			for ( size_t i = p_node->_firstTriangleId; i <= p_node->_lastTriangleId; i++ )
+			for ( size_t i = p_node->_firstTriangleId; i < p_node->_lastTriangleId; i++ )
 			{
 				float t;
 				if ( _triangles->at( i ).intersect( p_ray, t, normal ) )
@@ -150,17 +151,8 @@ namespace RT_ISICG
 			return false;
 		}
 
-		if ( p_node->_left->_aabb.intersect( p_ray, p_tMin, p_tMax ) )
-		{
-			return _intersectAnyRec( p_node->_left, p_ray, p_tMin, p_tMax );
-		}
-
-		if ( p_node->_right->_aabb.intersect( p_ray, p_tMin, p_tMax ) )
-		{
-			return _intersectAnyRec( p_node->_right, p_ray, p_tMin, p_tMax );
-		}
-
-		return false;
+		return _intersectAnyRec( p_node->_left, p_ray, p_tMin, p_tMax )
+			   || _intersectAnyRec( p_node->_right, p_ray, p_tMin, p_tMax );
 
 	} // namespace RT_ISICG
 

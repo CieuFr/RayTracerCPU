@@ -23,7 +23,9 @@ namespace RT_ISICG
 		tmin = glm::max( tmin, glm::min( tz1, tz2 ) );
 		tmax = glm::min( tmax, glm::max( tz1, tz2 ) );
 
-		// todo : gérer p_tmax et p_tmin
-		return (tmax >= tmin) ;
+		if ( tmin > p_tMax || tmax < p_tMin ) return false; 
+
+		return (tmax >= tmin);
+
 	}
 } // namespace RT_ISICG

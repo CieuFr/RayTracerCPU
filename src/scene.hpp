@@ -30,6 +30,8 @@ namespace RT_ISICG
 		void initTP2();
 		void initTP3();
 		void initTP4();
+		void initTP4Conference();
+
 		void initTP5();
 		void initTP6();
 		void initTP7();

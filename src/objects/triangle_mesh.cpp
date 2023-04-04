@@ -46,6 +46,7 @@ namespace RT_ISICG
 
 	bool MeshTriangle::intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const
 	{
+		
 		return _bvh.intersectAny( p_ray, p_tMin, p_tMax );
 		//Vec3f normal;
 		//for ( size_t i = 0; i < _triangles.size(); i++ )

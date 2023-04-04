@@ -1,5 +1,7 @@
 #include "scene.hpp"
 #include "materials/color_material.hpp"
+#include "materials/lambert_material.hpp"
+#include "materials/matte_material.hpp"
 #include "objects/plane.hpp"
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
@@ -71,10 +73,33 @@ namespace RT_ISICG
 		// = = = = = = = = = Add lights . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
 
-
-		
 	}
-	void Scene::initTP5() {}
+
+	void Scene::initTP4Conference() { 
+
+		loadFileTriangleMesh( "Conference", DATA_PATH + "/conference/conference.obj" );
+		 _addLight(
+			 new QuadLight( Vec3f( 900, 600, -300 ), Vec3f( -800, 0, 0 ), Vec3f( 0, 0, 300 ), WHITE, 40.f ) );
+
+	}
+	void Scene::initTP5() {
+		// Add objects.
+		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+
+		// Add materials.
+		_addMaterial( new MatteMaterial( "GreyLamb", GREY, 0.9f ) );
+		_addMaterial( new MatteMaterial( "RedLamb", RED, 0.9f ) );
+
+		// Link objects and materials.
+		_attachMaterialToObject( "GreyLamb", "Sphere1" );
+		_attachMaterialToObject( "RedLamb", "Plane1" );
+
+		// Add Lights
+		_addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
+	
+	
+	}
 	void Scene::initTP6() {}
 	void Scene::initTP7() {}
 	void Scene::initProjet() {}
@@ -109,7 +134,7 @@ namespace RT_ISICG
 		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
 	}
 
-	void Scene::init() { initTP4(); }
+	void Scene::init() { initTP4Conference(); }
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{
