@@ -21,7 +21,7 @@ namespace RT_ISICG
 			// TODO CEST NUL
 			const Vec3f wo = -p_ray.getDirection();
 			const Vec3f wi = p_lightSample._direction;
-
+			
 			return _brdf.evaluate(wo,wi,p_hitRecord._normal);
 		}
 

@@ -162,8 +162,8 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\integrators\direct_lighting_integrator.cpp" />
     <ClCompile Include="src\integrators\ray_cast_integrator.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\materials\metal_material.cpp" />
-    <ClCompile Include="src\materials\plastic_material.cpp" />
+    <ClCompile Include="src\materials\metal_material.hpp" />
+    <ClCompile Include="src\materials\plastic_material.hpp" />
     <ClCompile Include="src\objects\implicit_surface.cpp" />
     <ClCompile Include="src\objects\plane.cpp" />
     <ClCompile Include="src\objects\sphere.cpp" />

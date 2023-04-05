@@ -113,10 +113,10 @@
     <ClCompile Include="src\integrators\direct_lighting_integrator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\materials\plastic_material.cpp">
+    <ClCompile Include="src\materials\plastic_material.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\materials\metal_material.cpp">
+    <ClCompile Include="src\materials\metal_material.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

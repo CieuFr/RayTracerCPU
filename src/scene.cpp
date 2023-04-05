@@ -2,6 +2,9 @@
 #include "materials/color_material.hpp"
 #include "materials/lambert_material.hpp"
 #include "materials/matte_material.hpp"
+#include "materials/plastic_material.hpp"
+#include "materials/metal_material.hpp"
+
 #include "objects/plane.hpp"
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
@@ -88,12 +91,16 @@ namespace RT_ISICG
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		// Add materials.
-		_addMaterial( new MatteMaterial( "GreyLamb", GREY, 0.9f ) );
-		_addMaterial( new MatteMaterial( "RedLamb", RED, 0.9f ) );
+		/*_addMaterial( new PlasticMaterial( "GreyLamb", GREY, 8.f ) );
+		_addMaterial( new PlasticMaterial( "RedLamb", RED, 8.f ) );*/
+
+		_addMaterial( new MetalMaterial( "GoldenBunny", YELLOW, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f )));
+		_addMaterial( new MetalMaterial( "RedMetal", RED, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f ) ) );
+
 
 		// Link objects and materials.
-		_attachMaterialToObject( "GreyLamb", "Sphere1" );
-		_attachMaterialToObject( "RedLamb", "Plane1" );
+		_attachMaterialToObject( "GoldenBunny", "Sphere1" );
+		_attachMaterialToObject( "RedMetal", "Plane1" );
 
 		// Add Lights
 		_addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
