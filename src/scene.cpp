@@ -90,16 +90,16 @@ namespace RT_ISICG
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		// Add materials.
-		_addMaterial( new PlasticMaterial( "GreyLamb", GREY, 8.f ) );
-		_addMaterial( new PlasticMaterial( "RedLamb", RED, 8.f ) );
+		_addMaterial( new PlasticMaterial( "GreyPlastic", GREY, 8.f ) );
+		_addMaterial( new PlasticMaterial( "RedPlastic", RED, 8.f ) );
 
-		_addMaterial( new MetalMaterial( "GoldenBunny",  Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f )));
-		_addMaterial( new MetalMaterial( "RedMetal", RED, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f ) ) );
+		/*_addMaterial( new MetalMaterial( "GoldenBunny",  Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f )));
+		_addMaterial( new MetalMaterial( "RedMetal", RED, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f ) ) );*/
 
 
 		// Link objects and materials.
-		_attachMaterialToObject( "GoldenBunny", "Sphere1" );
-		_attachMaterialToObject( "RedMetal", "Plane1" );
+		_attachMaterialToObject( "GreyPlastic", "Sphere1" );
+		_attachMaterialToObject( "RedPlastic", "Plane1" );
 
 		// Add Lights
 		_addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
@@ -140,7 +140,7 @@ namespace RT_ISICG
 		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
 	}
 
-	void Scene::init() { initTP4Conference(); }
+	void Scene::init() { }
 
 	void Scene::loadFileTriangleMesh( const std::string & p_name, const std::string & p_path )
 	{

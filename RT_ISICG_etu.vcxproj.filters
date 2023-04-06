@@ -113,9 +113,6 @@
     <ClCompile Include="src\integrators\direct_lighting_integrator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\materials\plastic_material.hpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\materials\metal_material.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -230,6 +227,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\brdfs\cook_torrance_brdf.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\materials\plastic_material.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

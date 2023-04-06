@@ -8,24 +8,24 @@ namespace RT_ISICG
 	class PhongBRDF
 	{
 	  public:
-		PhongBRDF( const Vec3f & p_ks, const float p_s ) : _ks( p_ks ), _s(p_s) {};
+		PhongBRDF( const Vec3f & p_ks, const float p_shininess ) : _ks( p_ks ), _shininess( p_shininess ) {};
 
 		
 		inline Vec3f evaluate( const Vec3f & p_wo, const Vec3f & p_wi, const Vec3f & p_n ) const
-		{ 
-			const Vec3f wr = glm::reflect( p_wi, p_n );
-			const float cosAlpha		= glm::max(glm::dot( p_wo, wr ),0.f);
-			const float cosThetaI = glm::max(glm::dot(p_n,-p_wi ),0.f);
-			
-			return ( _ks / cosThetaI ) *  pow( cosAlpha, _s );
-			
+		{
+			Vec3f wr		= glm::reflect( p_wi, p_n );
+			float cosAlpha	= glm::dot( p_wo, wr );
+			float cosThetaI = glm::dot( p_n, -p_wi );
+
+			return ( _ks / cosThetaI ) * pow( cosAlpha, _shininess );
 		}
+
 
 		inline const Vec3f & getKs() const { return _ks; }
 
 	  private:
 		Vec3f _ks = WHITE;
-		float _s;
+		float _shininess;
 	};
 } // namespace RT_ISICG
 
