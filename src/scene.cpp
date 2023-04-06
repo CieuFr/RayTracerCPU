@@ -83,7 +83,6 @@ namespace RT_ISICG
 		loadFileTriangleMesh( "Conference", DATA_PATH + "/conference/conference.obj" );
 		 _addLight(
 			 new QuadLight( Vec3f( 900, 600, -300 ), Vec3f( -800, 0, 0 ), Vec3f( 0, 0, 300 ), WHITE, 40.f ) );
-
 	}
 	void Scene::initTP5() {
 		// Add objects.
@@ -91,10 +90,10 @@ namespace RT_ISICG
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		// Add materials.
-		/*_addMaterial( new PlasticMaterial( "GreyLamb", GREY, 8.f ) );
-		_addMaterial( new PlasticMaterial( "RedLamb", RED, 8.f ) );*/
+		_addMaterial( new PlasticMaterial( "GreyLamb", GREY, 8.f ) );
+		_addMaterial( new PlasticMaterial( "RedLamb", RED, 8.f ) );
 
-		_addMaterial( new MetalMaterial( "GoldenBunny", YELLOW, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f )));
+		_addMaterial( new MetalMaterial( "GoldenBunny",  Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f )));
 		_addMaterial( new MetalMaterial( "RedMetal", RED, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f ) ) );
 
 

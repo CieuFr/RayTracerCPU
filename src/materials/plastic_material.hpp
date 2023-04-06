@@ -25,8 +25,9 @@ namespace RT_ISICG
 			const Vec3f wo = -p_ray.getDirection();
 			const Vec3f wi = p_lightSample._direction;
 
-			return Vec3f( 0.3 ) * _brdfPhong.evaluate( wo, wi, p_hitRecord._normal )
-				   + Vec3f( 0.7 ) * _brdfLambert.evaluate();
+			return 0.3f * _brdfPhong.evaluate( wo, wi, p_hitRecord._normal )
+				   + 0.7f * _brdfLambert.evaluate();
+			//return _brdfPhong.evaluate( wo, wi, p_hitRecord._normal );
 		}
 
 		inline const Vec3f & getFlatColor() const override { return _brdfLambert.getKd(); }
