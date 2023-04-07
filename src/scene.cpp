@@ -4,6 +4,8 @@
 #include "materials/matte_material.hpp"
 #include "materials/plastic_material.hpp"
 #include "materials/metal_material.hpp"
+#include "materials/mirror_material.hpp"
+
 
 #include "objects/plane.hpp"
 #include "objects/sphere.hpp"
@@ -106,7 +108,52 @@ namespace RT_ISICG
 	
 	
 	}
-	void Scene::initTP6() {}
+	void Scene::initTP6() {
+		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		// = = = = = = = = = = = Add materials . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		_addMaterial( new MatteMaterial( " WhiteMatte ", WHITE, 0.6f ) );
+		_addMaterial( new MatteMaterial( " RedMatte ", RED, 0.6f ) );
+		_addMaterial( new MatteMaterial( " GreenMatte ", GREEN, 0.6f ) );
+		_addMaterial( new MatteMaterial( " BlueMatte ", BLUE, 0.6f ) );
+		_addMaterial( new MatteMaterial( " GreyMatte ", GREY, 0.6f ) );
+		_addMaterial( new MatteMaterial( " MagentaMatte ", MAGENTA, 0.6f ) );
+
+		_addMaterial(new MirrorMaterial("Mirror"));
+
+		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		// = = = = = = = = = = = =
+		// Add objects .
+		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		// = = = = = = = = = = = = =
+		// Spheres .
+		_addObject( new Sphere( " Sphere1 ", Vec3f( -2.f, 0.f, 3.f ), 1.5f ) );
+		_attachMaterialToObject( "Mirror", " Sphere1 " );
+		_addObject( new Sphere( " Sphere2 ", Vec3f( 2.f, 0.f, 3.f ), 1.5f ) );
+		_attachMaterialToObject( " WhiteMatte ", " Sphere2 " );
+		// Pseudo Cornell box made with infinite planes .
+		_addObject( new Plane( " PlaneGround ", Vec3f( 0.f, -3.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_attachMaterialToObject( " GreyMatte ", " PlaneGround " );
+		_addObject( new Plane( " PlaneLeft ", Vec3f( 5.f, 0.f, 0.f ), Vec3f( -1.f, 0.f, 0.f ) ) );
+		_attachMaterialToObject( " RedMatte ", " PlaneLeft " );
+		_addObject( new Plane( " PlaneCeiling ", Vec3f( 0.f, 7.f, 0.f ), Vec3f( 0.f, -1.f, 0.f ) ) );
+		_attachMaterialToObject( " GreenMatte ", " PlaneCeiling " );
+		_addObject( new Plane( " PlaneRight ", Vec3f( -5.f, 0.f, 0.f ), Vec3f( 1.f, 0.f, 0.f ) ) );
+		_attachMaterialToObject( " BlueMatte ", " PlaneRight " );
+		_addObject( new Plane( " PlaneFront ", Vec3f( 0.f, 0.f, 10.f ), Vec3f( 0.f, 0.f, -1.f ) ) );
+		_attachMaterialToObject( " MagentaMatte ", " PlaneFront " );
+		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		// = = = = = = = = = = = =
+		// Add lights .
+		// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+		// = = = = = = = = = = = = =
+		_addLight( new PointLight( Vec3f( 0.f, 5.f, 0.f ), WHITE, 100.f ) );
+		// _addLight ( new QuadLight ( Vec3f ( 1.f , 5.f , -2.f ) ,
+		// Vec3f ( -2.f , 0.f , 0.f ) ,
+		// Vec3f ( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
+		}
+	
+	
 	void Scene::initTP7() {}
 	void Scene::initProjet() {}
 

@@ -13,9 +13,9 @@ namespace RT_ISICG
 		
 		inline Vec3f evaluate( const Vec3f & p_wo, const Vec3f & p_wi, const Vec3f & p_n ) const
 		{
-			Vec3f wr		= glm::reflect( p_wi, p_n );
-			float cosAlpha	= glm::dot( p_wo, wr );
-			float cosThetaI = glm::dot( p_n, -p_wi );
+			Vec3f wr		= glm::reflect( -p_wi, p_n );
+			float cosAlpha	= glm::max( 0.f, glm::dot( p_wo, wr ) );
+			float cosThetaI = glm::dot( p_n, p_wi );
 
 			return ( _ks / cosThetaI ) * pow( cosAlpha, _shininess );
 		}

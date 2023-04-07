@@ -1,5 +1,5 @@
 #ifndef __RT_ISICG_BRDF_COOK_TORRANCE__
-#define __RT_ISICG_BRDF_TORRANCE__
+#define __RT_ISICG_BRDF_COOK_TORRANCE__
 
 #include "defines.hpp"
 
