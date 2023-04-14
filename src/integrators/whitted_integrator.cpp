@@ -24,7 +24,8 @@ namespace RT_ISICG
 			if ( hitRecord._object->getMaterial()->isMirror() )
 			{
 				const Vec3f reflectedDirection = normalize( glm::reflect( p_ray.getDirection(), hitRecord._normal ) );
-				const Ray	reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
+				Ray	reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
+				reflectedRay.offset(hitRecord._normal);
 				return _recursiveLighting( p_scene,
 										   reflectedRay,
 										   0,
