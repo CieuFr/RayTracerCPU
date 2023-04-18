@@ -24,8 +24,8 @@ namespace RT_ISICG
 			if ( hitRecord._object->getMaterial()->isMirror() )
 			{
 				const Vec3f reflectedDirection = normalize( glm::reflect( p_ray.getDirection(), hitRecord._normal ) );
-				Ray	reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
-				reflectedRay.offset(hitRecord._normal);
+				Ray			reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
+				reflectedRay.offset( hitRecord._normal );
 				return _recursiveLighting( p_scene,
 										   reflectedRay,
 										   0,
@@ -33,14 +33,38 @@ namespace RT_ISICG
 										   p_currentNumberOfBounce + 1,
 										   hitRecord._object->getMaterial()->getIOR() );
 			}
-			else if ( hitRecord._object->getMaterial()->isTransparent())
+			else if ( hitRecord._object->getMaterial()->isTransparent() )
 			{
+				// https://en.wikipedia.org/wiki/Schlick%27s_approximation
+				float		n1			   = p_previousMaterialIOR;
+				float		n2			   = hitRecord._object->getMaterial()->getIOR();
+				const float eta			   = ( n1 / n2 );
+				float		cosTheta	   = dot( p_ray.getDirection(), hitRecord._normal );
+				float		r0			   = pow( ( n1 - n2 ) / ( n1 + n2 ), 2 );
+				float		reflectionCoef = r0 + ( 1 - r0 ) * pow( ( 1 - cosTheta ), 5 );
+
 				const Vec3f reflectedDirection = glm::reflect( p_ray.getDirection(), hitRecord._normal );
-				const Ray	reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
-				const float eta				   = ( p_previousMaterialIOR / hitRecord._object->getMaterial()->getIOR() );
+				Ray	reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
+				reflectedRay.offset( hitRecord._normal );
+				Vec3f		reflectedColor	   = _recursiveLighting( p_scene,
+															 reflectedRay,
+															 0,
+															 p_tMax,
+															 p_currentNumberOfBounce + 1,
+															 hitRecord._object->getMaterial()->getIOR() );
+				if ( reflectionCoef == 1 ) { return reflectedColor; }
 				const Vec3f refractedDirection = glm::refract( p_ray.getDirection(), hitRecord._normal, eta );
-				const Ray	refractedRay	   = Ray( hitRecord._point, refractedDirection );
-				return WHITE;
+				Ray	refractedRay	   = Ray( hitRecord._point, refractedDirection );
+				refractedRay.offset( hitRecord._normal );
+				Vec3f		refractedColor	   = _recursiveLighting( p_scene,
+															 refractedRay,
+															 0,
+															 p_tMax,
+															 p_currentNumberOfBounce + 1,
+															 hitRecord._object->getMaterial()->getIOR() );
+
+				return reflectionCoef * reflectedColor + ( 1 - reflectionCoef ) * refractedColor;
+				
 			}
 			else { return _directLighting( p_scene, hitRecord, p_ray ); }
 		}
