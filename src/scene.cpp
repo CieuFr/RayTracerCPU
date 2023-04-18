@@ -9,6 +9,8 @@
 #include "objects/plane.hpp"
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
+#include "objects/implicit_sphere.hpp"
+
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -44,7 +46,6 @@ namespace RT_ISICG
 		// Link objects and materials.
 		_attachMaterialToObject( "Blue", "Sphere1" );
 	}
-
 	void Scene::initTP2()
 	{
 		// Add objects.
@@ -62,7 +63,6 @@ namespace RT_ISICG
 		// Add Lights
 		_addLight( new PointLight( Vec3f( 1, 10, 1 ), Vec3f( 1.f ), 100.f ) );
 	}
-
 	void Scene::initTP3()
 	{
 		// Add objects.
@@ -108,7 +108,6 @@ namespace RT_ISICG
 		// = = = = = = = = = Add lights . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
 	}
-
 	void Scene::initTP4Conference()
 	{
 		loadFileTriangleMesh( "Conference", DATA_PATH + "/conference/conference.obj" );
@@ -181,7 +180,11 @@ namespace RT_ISICG
 		// Vec3f ( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
 	}
 
-	void Scene::initTP7() {}
+	void Scene::initTP7() {
+
+		_addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+	
+	}
 	void Scene::initProjet() {}
 
 	void Scene::init() {}
