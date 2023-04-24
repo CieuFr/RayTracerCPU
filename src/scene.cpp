@@ -183,6 +183,10 @@ namespace RT_ISICG
 	void Scene::initTP7() {
 
 		_addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addMaterial( new ColorMaterial( "RedColor", RED ) );
+		_attachMaterialToObject( "RedColor", "Sphere1" );
+
+		_addLight( new PointLight( Vec3f( 0.f, 5.f, 0.f ), WHITE, 100.f ) );
 	
 	}
 	void Scene::initProjet() {}

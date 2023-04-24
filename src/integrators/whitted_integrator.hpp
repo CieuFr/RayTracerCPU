@@ -18,12 +18,12 @@ namespace RT_ISICG
 
 		Vec3f _directLighting( const Scene & p_lightList, const HitRecord & p_hitRecord, const Ray & p_ray ) const;
 
-		Vec3f _recursiveLighting( const Scene &	  p_scene,
-										const Ray &		  p_ray,
-										const float		  p_tMin,
-										const float		  p_tMax,
-										const int		  p_currentNumberOfBounce,
-										const float previousMaterialIOR) const;
+		Vec3f _recursiveLighting( const Scene & p_scene,
+								  const Ray &	p_ray,
+								  const float	p_tMin,
+								  const float	p_tMax,
+								  const int		p_currentNumberOfBounce,
+								  const bool	p_insideMaterial ) const;
 
 	  private:
 		int _maxNbOfBounces = 5;

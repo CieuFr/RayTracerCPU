@@ -12,9 +12,9 @@ namespace RT_ISICG
 		{
 			float distanceFromObject = _sdf( p_ray.pointAtT( t ) );
 
-			if ( distanceFromObject < _minDistance )
+			if ( abs(distanceFromObject) < _minDistance )
 			{
-				p_hitRecord._distance = distanceFromObject;
+				p_hitRecord._distance = abs(distanceFromObject);
 				p_hitRecord._point	  = p_ray.pointAtT( t );
 				p_hitRecord._normal	  = _evaluateNormal( p_ray.pointAtT( t ) );
 				p_hitRecord.faceNormal( p_ray.getDirection() );

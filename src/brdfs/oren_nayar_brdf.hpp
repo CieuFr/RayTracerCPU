@@ -11,8 +11,8 @@ namespace RT_ISICG
 	  public:
 		OrenNayarBRDF( const Vec3f & p_kd, float p_sigma ) : _kd( p_kd )
 		{
-			_A = 1.f - 0.5f * ( pow( p_sigma, 2 ) / ( pow( p_sigma, 2 ) + 0.33f ) );
-			_B = 0.45f * ( pow( p_sigma, 2 ) / ( pow( p_sigma, 2 ) + 0.09f ) );
+			_A = 1.f - 0.5f * ( pow( p_sigma, 2.f ) / ( pow( p_sigma, 2.f ) + 0.33f ) );
+			_B = 0.45f * ( pow( p_sigma, 2.f ) / ( pow( p_sigma, 2.f ) + 0.09f ) );
 		};
 
 		// * INV_PIf : could be done in the constructor...

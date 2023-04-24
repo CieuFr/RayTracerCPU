@@ -462,7 +462,7 @@ int main( int argc, char ** argv )
 {
 	try
 	{
-		return RT_ISICG::mainTP6( argc, argv );
+		return RT_ISICG::mainTP7( argc, argv );
 	}
 	catch ( const std::exception & e )
 	{

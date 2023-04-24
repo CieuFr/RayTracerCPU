@@ -7,7 +7,7 @@ namespace RT_ISICG
 								 const float   p_tMin,
 								 const float   p_tMax ) const
 	{
-		return _recursiveLighting( p_scene, p_ray, p_tMin, p_tMax, 0, 1 );
+		return _recursiveLighting( p_scene, p_ray, p_tMin, p_tMax, 0, false );
 	}
 
 	Vec3f WhittedIntegrator::_recursiveLighting( const Scene & p_scene,
@@ -15,7 +15,7 @@ namespace RT_ISICG
 												 const float   p_tMin,
 												 const float   p_tMax,
 												 const int	   p_currentNumberOfBounce,
-												 const float   p_previousMaterialIOR ) const
+												 const bool	   p_insideMaterial ) const
 	{
 		if ( p_currentNumberOfBounce > _maxNbOfBounces ) return BLACK;
 		HitRecord hitRecord;
@@ -31,40 +31,39 @@ namespace RT_ISICG
 										   0,
 										   p_tMax,
 										   p_currentNumberOfBounce + 1,
-										   hitRecord._object->getMaterial()->getIOR() );
+										   p_insideMaterial );
 			}
 			else if ( hitRecord._object->getMaterial()->isTransparent() )
 			{
 				// https://en.wikipedia.org/wiki/Schlick%27s_approximation
-				float		n1			   = p_previousMaterialIOR;
-				float		n2			   = hitRecord._object->getMaterial()->getIOR();
-				const float eta			   = ( n1 / n2 );
-				float		cosTheta	   = dot( p_ray.getDirection(), hitRecord._normal );
-				float		r0			   = pow( ( n1 - n2 ) / ( n1 + n2 ), 2 );
-				float		reflectionCoef = r0 + ( 1 - r0 ) * pow( ( 1 - cosTheta ), 5 );
+				float			 n1				= 1;
+				float n2				= hitRecord._object->getMaterial()->getIOR();
+				const float		 eta			= p_insideMaterial ? ( n2 / n1 ) : ( n1 / n2 );
+				float			 cosTheta		= glm::max(dot( -p_ray.getDirection(), hitRecord._normal ),0.f);
+				float			 r0				= pow( ( n1 - n2 ) / ( n1 + n2 ), 2.f );
+				float			 reflectionCoef = r0 + ( 1 - r0 ) * pow( ( 1 - cosTheta ), 5.f );
 
 				const Vec3f reflectedDirection = glm::reflect( p_ray.getDirection(), hitRecord._normal );
-				Ray	reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
+				Ray			reflectedRay	   = Ray( hitRecord._point, reflectedDirection );
 				reflectedRay.offset( hitRecord._normal );
-				Vec3f		reflectedColor	   = _recursiveLighting( p_scene,
-															 reflectedRay,
-															 0,
-															 p_tMax,
-															 p_currentNumberOfBounce + 1,
-															 hitRecord._object->getMaterial()->getIOR() );
-				if ( reflectionCoef == 1 ) { return reflectedColor; }
+				Vec3f reflectedColor = _recursiveLighting( p_scene,
+														   reflectedRay,
+														   0,
+														   p_tMax,
+														   p_currentNumberOfBounce + 1,
+														   p_insideMaterial );
+				if ( reflectionCoef >= 1 ) { return reflectedColor; }
 				const Vec3f refractedDirection = glm::refract( p_ray.getDirection(), hitRecord._normal, eta );
-				Ray	refractedRay	   = Ray( hitRecord._point, refractedDirection );
-				refractedRay.offset( hitRecord._normal );
-				Vec3f		refractedColor	   = _recursiveLighting( p_scene,
-															 refractedRay,
-															 0,
-															 p_tMax,
-															 p_currentNumberOfBounce + 1,
-															 hitRecord._object->getMaterial()->getIOR() );
+				Ray			refractedRay	   = Ray( hitRecord._point, refractedDirection );
+				refractedRay.offset( -hitRecord._normal );
+				Vec3f refractedColor = _recursiveLighting( p_scene,
+														   refractedRay,
+														   0,
+														   p_tMax,
+														   p_currentNumberOfBounce + 1,
+														   !p_insideMaterial );
 
 				return reflectionCoef * reflectedColor + ( 1 - reflectionCoef ) * refractedColor;
-				
 			}
 			else { return _directLighting( p_scene, hitRecord, p_ray ); }
 		}
