@@ -12,10 +12,19 @@ namespace RT_ISICG
 
 		inline Vec3f evaluate( const Vec3f & p_wo, const Vec3f & p_wi, const Vec3f & p_n ) const
 		{
-			Vec3f h			= normalize( p_wo + p_wi );
-			Vec3f wr		= glm::reflect( -p_wi, p_n );
-			float cosAlpha	= glm::max( 0.f, glm::dot( p_wo, wr ) );
-			float cosThetaI = glm::max( 0.f, glm::dot( p_n, _blinnphong ? h : p_wi ) );
+			float cosAlpha = 0.f;
+			if ( _blinnphong )
+			{
+				Vec3f h	 = normalize( p_wo + p_wi );
+				cosAlpha = glm::max( 0.f, glm::dot( p_n, h ) );
+			}
+			else
+			{
+				Vec3f wr = glm::reflect( -p_wi, p_n );
+				cosAlpha = glm::max( 0.f, glm::dot( p_wo, wr ) );
+			}
+			float cosThetaI = glm::max( 0.f, glm::dot( p_n, p_wi ) );
+			
 			return ( _ks / cosThetaI ) * pow( cosAlpha, _shininess );
 		}
 
@@ -23,7 +32,7 @@ namespace RT_ISICG
 
 	  private:
 		Vec3f _ks		  = WHITE;
-		bool  _blinnphong = false;
+		bool  _blinnphong = true;
 		float _shininess;
 	};
 } // namespace RT_ISICG
