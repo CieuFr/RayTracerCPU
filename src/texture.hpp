@@ -10,7 +10,7 @@ namespace RT_ISICG
 	class Texture
 	{
 	  public:
-		Texture() = delete;
+		Texture() = default;
 		Texture( const int p_width, const int p_height, const int _nbChannels = 3 )
 			: _width( p_width ), _height( p_height ), _pixels( _width * _height * _nbChannels, 0 )
 		{
@@ -44,10 +44,12 @@ namespace RT_ISICG
 
 		void saveJPG( const std::string & p_path, const int p_quality = 100 );
 
+		virtual Vec3f value( Vec2f p_uv, const Vec3f & p_point );
+
 	  private:
 		const int _nbChannels = 3;
-		int		  _width;
-		int		  _height;
+		int		  _width	  = 0;
+		int		  _height	  = 0;
 
 		std::vector<unsigned char> _pixels;
 	};

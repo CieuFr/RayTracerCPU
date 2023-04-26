@@ -18,7 +18,7 @@ namespace RT_ISICG
 					 const HitRecord &	 p_hitRecord,
 					 const LightSample & p_lightSample ) const override
 		{
-			// TODO CEST NUL
+			
 			const Vec3f wo = -p_ray.getDirection();
 			const Vec3f wi = p_lightSample._direction;
 			

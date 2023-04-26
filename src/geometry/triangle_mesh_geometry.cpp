@@ -28,7 +28,7 @@ namespace RT_ISICG
 		const Vec3f & v1 = _refMesh->_vertices[ _v1 ];
 		const Vec3f & v2 = _refMesh->_vertices[ _v2 ];
 
-		Vec3f edge1, edge2, edge3, tvec, pvec, qvec;
+		Vec3f edge1, edge2, tvec, pvec, qvec;
 		float det, inv_det, t, u, v;
 		edge1 = v1 - v0;
 		edge2 = v2 - v0;

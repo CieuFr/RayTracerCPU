@@ -29,6 +29,8 @@ namespace RT_ISICG
 		// Check for any intersection.
 		virtual bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const = 0;
 
+		virtual const Vec2f getUV( const Vec3f & p_point ) const { return VEC2F_ZERO; }
+
 	  protected:
 		const std::string _name;
 		BaseMaterial *	  _material = nullptr;

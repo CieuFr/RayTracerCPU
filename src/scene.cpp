@@ -10,6 +10,9 @@
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
 #include "objects/implicit_sphere.hpp"
+#include "objects/implicit_death_star.hpp"
+#include "objects/implicit_donut.hpp"
+#include "objects/implicit_infinite_cylinder.hpp"
 
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
@@ -182,6 +185,9 @@ namespace RT_ISICG
 
 	void Scene::initTP7() {
 
+		/*_addObject( new ImplicitDonut( "Donut", Vec3f( 0.f, 0.f, 3.f ),Vec2f(1.f,5.f) ));
+		_addObject( new ImplicitInfiniteCylinder( "Cylinder", Vec3f( 0.f, 0.f, 3.f ), Vec3f(1.f) ));
+		_addObject( new ImplicitDeathStar( "DeathStar", Vec3f( 0.f, 0.f, 3.f ), 1.f, 10.f, 5.f ) );*/
 		_addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 		_addMaterial( new ColorMaterial( "RedColor", RED ) );
 		_attachMaterialToObject( "RedColor", "Sphere1" );
@@ -189,7 +195,10 @@ namespace RT_ISICG
 		_addLight( new PointLight( Vec3f( 0.f, 5.f, 0.f ), WHITE, 100.f ) );
 	
 	}
-	void Scene::initProjet() {}
+	void Scene::initProjet() {
+	
+	
+	}
 
 	void Scene::init() {}
 

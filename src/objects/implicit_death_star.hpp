@@ -28,7 +28,7 @@ namespace RT_ISICG
 			// sampling independent computations (only depend on shape)
 			float a = ( _bigSphereRadius * _bigSphereRadius - _smallSphereRadius * _smallSphereRadius
 						+ _distanceBetweenSpheres * _distanceBetweenSpheres )
-					  / ( 2.0 * _distanceBetweenSpheres );
+					  / ( 2.0f * _distanceBetweenSpheres );
 			float b = sqrt( glm::max( _bigSphereRadius * _bigSphereRadius - a * a, 0.f ) );
 
 			// sampling dependant computations
@@ -37,7 +37,7 @@ namespace RT_ISICG
 				return length( p - Vec2f( a, b ) );
 			else
 				return glm::max( ( length( p ) - _bigSphereRadius ),
-								 -( length( p - Vec2f( _distanceBetweenSpheres, 0 ) ) - _smallSphereRadius ) );
+								 -( length( p - Vec2f( _distanceBetweenSpheres, 0.f ) ) - _smallSphereRadius ) );
 		}
 
 	  private:

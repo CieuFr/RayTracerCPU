@@ -68,7 +68,7 @@ namespace RT_ISICG
 				float p_tmax	= 100;
 				Vec3f colorMean = Vec3f( 0 );
 
-				for ( unsigned int k = 0; k < _nbPixelSamples; k++ )
+				for ( int k = 0; k < _nbPixelSamples; k++ )
 				{
 					float xOffSet = randomFloat();
 					float yOffSet = randomFloat();

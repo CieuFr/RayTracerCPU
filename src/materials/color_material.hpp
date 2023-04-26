@@ -9,21 +9,18 @@ namespace RT_ISICG
 	class ColorMaterial : public BaseMaterial
 	{
 	  public:
-		ColorMaterial( const std::string & p_name, const Vec3f & p_color ) : BaseMaterial( p_name ), _color( p_color )
-		{
-		}
+		ColorMaterial( const std::string & p_name, const Vec3f & p_color ) : BaseMaterial( p_name, p_color ) {}
+		ColorMaterial( const std::string & p_name, Texture * p_texture ) : BaseMaterial( p_name, p_texture ) {}
 
 		virtual ~ColorMaterial() = default;
 
 		Vec3f shade( const Ray & p_ray, const HitRecord & p_hit, const LightSample & p_lightSample ) const override
 		{
-			return _color;
+			return _texture->value( p_hit._uv, p_hit._point );
 		}
 
-		inline const Vec3f & getFlatColor() const override { return _color; }
+		inline const Vec3f & getFlatColor() const override { return _texture->value( VEC2F_ZERO, VEC3F_ZERO ); }
 
-	  protected:
-		Vec3f _color = Vec3f( 1.f, 1.f, 1.f );
 	};
 
 } // namespace RT_ISICG

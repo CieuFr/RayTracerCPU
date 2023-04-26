@@ -26,8 +26,6 @@ namespace RT_ISICG
 
 			return ( ( 0.3f * _brdfPhong.evaluate( wo, wi, p_hitRecord._normal ) )
 					 + ( 0.7f * _brdfLambert.evaluate() ) );
-			// return _brdfPhong.evaluate( wo, wi, p_hitRecord._normal );
-			//return Vec3f(0.f);
 		}
 
 		inline const Vec3f & getFlatColor() const override { return _brdfLambert.getKd(); }

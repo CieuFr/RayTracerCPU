@@ -26,6 +26,9 @@ namespace RT_ISICG
 				// Check for any intersection between p_tMin and p_tMax.
 		virtual bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
 
+
+		virtual const Vec2f getUV( const Vec3f & p_point ) const;
+
 	  private:
 		SphereGeometry _geometry;
 	};

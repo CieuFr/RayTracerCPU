@@ -12,7 +12,7 @@ namespace RT_ISICG
 		{
 			float distanceFromObject = _sdf( p_ray.pointAtT( t ) );
 
-			if ( abs(distanceFromObject) < _minDistance )
+			if ( abs( distanceFromObject ) < _minDistance && t < p_tMax )
 			{
 				p_hitRecord._distance = abs(distanceFromObject);
 				p_hitRecord._point	  = p_ray.pointAtT( t );

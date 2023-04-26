@@ -56,17 +56,17 @@ namespace RT_ISICG
 		{
 			p_node->_left  = new BVHNode();
 			p_node->_right = new BVHNode();
-			float axe	   = p_node->_aabb.largestAxis();
+			size_t axe	   = p_node->_aabb.largestAxis();
 			Vec3f centre   = p_node->_aabb.centroid();
 
-			float _milieu = centre[ axe ];
+			float milieu = centre[ axe ];
 
 			std::vector<TriangleMeshGeometry>::iterator it;
 			it			 = std::partition( _triangles->begin() + p_firstTriangleId,
 								   _triangles->begin() + p_lastTriangleId,
-								   [ _milieu, axe ]( const TriangleMeshGeometry & triangle )
-								   { return triangle.getAABB().centroid()[ axe ] < _milieu; } );
-			int cutIndex = it - _triangles->begin();
+								   [ milieu, axe ]( const TriangleMeshGeometry & triangle )
+								   { return triangle.getAABB().centroid()[ axe ] < milieu; } );
+			int cutIndex = int(it - _triangles->begin());
 			_buildRec( p_node->_left, p_firstTriangleId, cutIndex, p_depth + 1 );
 			_buildRec( p_node->_right, cutIndex, p_lastTriangleId, p_depth + 1 );
 		}
