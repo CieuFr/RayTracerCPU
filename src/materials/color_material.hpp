@@ -10,7 +10,7 @@ namespace RT_ISICG
 	{
 	  public:
 		ColorMaterial( const std::string & p_name, const Vec3f & p_color ) : BaseMaterial( p_name, p_color ) {}
-		ColorMaterial( const std::string & p_name, Texture * p_texture ) : BaseMaterial( p_name, p_texture ) {}
+		ColorMaterial( const std::string & p_name, ImageTexture * p_texture ) : BaseMaterial( p_name, p_texture ) {}
 
 		virtual ~ColorMaterial() = default;
 

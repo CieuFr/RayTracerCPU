@@ -48,7 +48,7 @@ namespace RT_ISICG
 	}
 
 
-	float Renderer::renderImage( const Scene & p_scene, const BaseCamera * p_camera, Texture & p_texture )
+	float Renderer::renderImage( const Scene & p_scene, const BaseCamera * p_camera, ImageTexture & p_texture )
 	{
 		const int width	 = p_texture.getWidth();
 		const int height = p_texture.getHeight();

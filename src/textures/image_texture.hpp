@@ -2,21 +2,22 @@
 #define __RT_ISICG_IMAGE__
 
 #include "defines.hpp"
+#include "textures/texture.hpp"
 #include <string>
 #include <vector>
 
 namespace RT_ISICG
 {
-	class Texture
+	class ImageTexture : public Texture
 	{
 	  public:
-		Texture() = default;
-		Texture( const int p_width, const int p_height, const int _nbChannels = 3 )
+		ImageTexture() = default;
+		ImageTexture( const int p_width, const int p_height, const int _nbChannels = 3 )
 			: _width( p_width ), _height( p_height ), _pixels( _width * _height * _nbChannels, 0 )
 		{
 			_pixels.shrink_to_fit();
 		}
-		~Texture() = default;
+		~ImageTexture() = default;
 
 		inline const int						  getWidth() const { return _width; }
 		inline const int						  getHeight() const { return _height; }
@@ -42,9 +43,9 @@ namespace RT_ISICG
 			_pixels[ pixelId + 3 ] = static_cast<unsigned char>( p_color.a * 255 );
 		}
 
-		void saveJPG( const std::string & p_path, const int p_quality = 100 );
+		void saveJPG( const std::string & p_path, const int p_quality = 100 );	   
 
-		virtual Vec3f value( Vec2f p_uv, const Vec3f & p_point );
+		virtual Vec3f value(const Vec2f & p_uv, const Vec3f & p_point ) const override;
 
 	  private:
 		const int _nbChannels = 3;

@@ -10,9 +10,9 @@
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
 #include "objects/implicit_sphere.hpp"
-#include "objects/implicit_death_star.hpp"
-#include "objects/implicit_donut.hpp"
-#include "objects/implicit_infinite_cylinder.hpp"
+#include "objects/implicit_death_str.hpp"
+#include "objects/implicit_torus.hpp"
+#include "objects/implicit_cylinder_infinite.hpp"
 
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
@@ -119,7 +119,7 @@ namespace RT_ISICG
 	void Scene::initTP5()
 	{
 		// Add objects.
-		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		// Add materials.
@@ -135,6 +135,7 @@ namespace RT_ISICG
 
 		// Add Lights
 		_addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
+
 	}
 	void Scene::initTP6()
 	{
@@ -183,16 +184,29 @@ namespace RT_ISICG
 		// Vec3f ( 0.f , 1.f , 2.f ) , WHITE , 40.f ) );
 	}
 
-	void Scene::initTP7() {
+	void Scene::initTP7()
+	{
+		
+		 _addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		 _addObject( new ImplicitInfiniteCylinder( "Cylinder", Vec3f( 0.f, 0.f, 3.f ), Vec3f( 1.f ) ) );
+		// Add materials.
+		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
+		_addMaterial( new ColorMaterial( "Red", RED ) );
+
+		// Link objects and materials.
+		_attachMaterialToObject( "Blue", "Sphere1" );
+		_attachMaterialToObject( "Red", "Plane1" );
+
+		// Add Lights
+		_addLight( new QuadLight( Vec3f( 1, 10, 2 ), Vec3f( -2, 0, 0 ), Vec3f( 0, 0, 2 ), Vec3f( 1.f ), 40.f ) );
+
+
 
 		/*_addObject( new ImplicitDonut( "Donut", Vec3f( 0.f, 0.f, 3.f ),Vec2f(1.f,5.f) ));
-		_addObject( new ImplicitInfiniteCylinder( "Cylinder", Vec3f( 0.f, 0.f, 3.f ), Vec3f(1.f) ));
 		_addObject( new ImplicitDeathStar( "DeathStar", Vec3f( 0.f, 0.f, 3.f ), 1.f, 10.f, 5.f ) );*/
-		_addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
-		_addMaterial( new ColorMaterial( "RedColor", RED ) );
-		_attachMaterialToObject( "RedColor", "Sphere1" );
+		//_addObject( new ImplicitSphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 
-		_addLight( new PointLight( Vec3f( 0.f, 5.f, 0.f ), WHITE, 100.f ) );
 	
 	}
 	void Scene::initProjet() {

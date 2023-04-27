@@ -1,5 +1,3 @@
-#pragma once
-#pragma once
 #ifndef __RT_ISICG_IMPLICIT_INFINITE_CYLINDER__
 #define __RT_ISICG_IMPLICIT_INFINITE_CYLINDER__
 
@@ -10,7 +8,7 @@ namespace RT_ISICG
 	class ImplicitInfiniteCylinder : public ImplicitSurface
 	{
 	  public:
-		ImplicitInfiniteCylinder()			 = delete;
+		ImplicitInfiniteCylinder()			= delete;
 		virtual ~ImplicitInfiniteCylinder() = default;
 
 		ImplicitInfiniteCylinder( const std::string & p_name, const Vec3f & p_centre, const Vec3f p_cylinder )
@@ -18,13 +16,14 @@ namespace RT_ISICG
 		{
 		}
 
-		float _sdf( const Vec3f & p_point ) const override { 
+		float _sdf( const Vec3f & p_point ) const override
+		{
 			return length( Vec2f( _centre.x, _centre.z ) - Vec2f( _cylinder.x, _cylinder.y ) ) - _cylinder.z;
 		}
 
 	  private:
 		// Signed Distance Function
-		Vec3f _centre = VEC3F_ZERO;
+		Vec3f _centre	= VEC3F_ZERO;
 		Vec3f _cylinder = VEC3F_ZERO;
 	};
 

@@ -74,9 +74,10 @@ namespace RT_ISICG
 											  const HitRecord & p_hitRecord,
 											  const Ray &		p_ray ) const
 	{
-		Vec3f liColor = Vec3f( 0 );
+		Vec3f liColor = VEC3F_ZERO;
 		for ( BaseLight * light : p_scene.getLights() )
 		{
+			Vec3f currentColor		 = VEC3F_ZERO;
 			int numberOfShadowRays = 1;
 			if ( light->getIsSurface() ) { numberOfShadowRays = _nbLightSamples; }
 
@@ -91,13 +92,15 @@ namespace RT_ISICG
 
 				if ( !p_scene.intersectAny( shadowRay, 0, lightSample._distance ) )
 				{
-					liColor += p_hitRecord._object->getMaterial()->shade( p_ray, p_hitRecord, lightSample )
+					currentColor += p_hitRecord._object->getMaterial()->shade( p_ray, p_hitRecord, lightSample )
 							   * lightSample._radiance * maxThetaZero;
 				}
 			}
 
-			liColor /= numberOfShadowRays;
+			liColor += ( currentColor / float(numberOfShadowRays) );
 		}
+
+		liColor /= p_scene.getLights().size();
 
 		return liColor;
 	}

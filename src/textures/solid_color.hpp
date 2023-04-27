@@ -2,7 +2,9 @@
 #define __RT_ISICG_SOLID_COLOR__
 
 #include "defines.hpp"
-#include "texture.hpp"
+#include "textures/image_texture.hpp"
+#include "textures/texture.hpp"
+
 
 namespace RT_ISICG
 {
@@ -13,7 +15,8 @@ namespace RT_ISICG
 		SolidColorTexture( Vec3f p_color ) : _color( p_color ) {}
 		~SolidColorTexture() = default;
 
-		virtual Vec3f value(const Vec2f& p_uv, const Vec3f & p_point ) const { return _color; }
+		Vec3f value(const Vec2f& p_uv, const Vec3f & p_point ) const { return _color; }
+		
 
 	  private:
 		Vec3f _color = WHITE;

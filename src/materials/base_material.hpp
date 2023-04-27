@@ -4,7 +4,7 @@
 #include "hit_record.hpp"
 #include "lights/light_sample.hpp"
 #include "ray.hpp"
-#include "texture.hpp"
+#include "textures/texture.hpp"
 #include "textures/solid_color.hpp"
 
 namespace RT_ISICG
@@ -18,7 +18,7 @@ namespace RT_ISICG
 		{
 			_texture = new SolidColorTexture( p_color );
 		}
-		BaseMaterial( const std::string & p_name, Texture * p_texture ) : _name( p_name ), _texture( p_texture ) {}
+		BaseMaterial( const std::string & p_name, ImageTexture * p_texture ) : _name( p_name ), _texture( p_texture ) {}
 		
 		virtual ~BaseMaterial() = default;
 

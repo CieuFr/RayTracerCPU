@@ -83,7 +83,7 @@
     <ClCompile Include="src\geometry\sphere_geometry.cpp">
       <Filter>Source Files\geometry</Filter>
     </ClCompile>
-    <ClCompile Include="src\texture.cpp">
+    <ClCompile Include="src\textures\image_texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\integrators\ray_cast_integrator.cpp">
@@ -181,7 +181,7 @@
     <ClInclude Include="src\utils\chrono.hpp">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\texture.hpp">
+    <ClInclude Include="src\textures\image_texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\materials\color_material.hpp">
@@ -256,25 +256,25 @@
     <ClInclude Include="src\textures\solid_color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\implicit_donut.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\objects\implicit_infinite_cylinder.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\objects\implicit_death_star.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\utils\image.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\random.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Victor\Downloads\file_path.hpp">
+    <ClInclude Include="src\utils\file_path.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\utils\file_path.hpp">
+    <ClInclude Include="src\objects\implicit_death_str.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\implicit_torus.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\implicit_cylinder_infinite.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\textures\texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

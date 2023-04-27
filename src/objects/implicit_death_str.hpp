@@ -1,5 +1,3 @@
-#pragma once
-#pragma once
 #ifndef __RT_ISICG_IMPLICIT_DEATH_STAR
 #define __RT_ISICG_IMPLICIT_DEATH_STAR
 

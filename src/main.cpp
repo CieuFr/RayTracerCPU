@@ -11,7 +11,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -61,7 +61,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -111,7 +111,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -161,7 +161,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -211,7 +211,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -261,7 +261,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -311,7 +311,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -361,7 +361,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -432,7 +432,7 @@ namespace RT_ISICG
 		const int imgHeight = 400;
 
 		// Create a texture to render the scene.
-		Texture img = Texture( imgWidth, imgHeight );
+		ImageTexture img = ImageTexture( imgWidth, imgHeight );
 
 		// Create and init scene.
 		Scene scene;
@@ -482,7 +482,7 @@ int main( int argc, char ** argv )
 {
 	try
 	{
-		return RT_ISICG::mainTP5( argc, argv );
+		return RT_ISICG::mainTP7( argc, argv );
 	}
 	catch ( const std::exception & e )
 	{

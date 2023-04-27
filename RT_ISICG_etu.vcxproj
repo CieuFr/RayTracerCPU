@@ -172,12 +172,11 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\ray_differential.hpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\scene.cpp" />
-    <ClCompile Include="src\texture.cpp" />
+    <ClCompile Include="src\textures\image_texture.cpp" />
     <ClCompile Include="src\utils\console_progress_bar.cpp" />
     <ClCompile Include="src\utils\image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Victor\Downloads\file_path.hpp" />
     <ClInclude Include="src\aabb.hpp" />
     <ClInclude Include="src\brdfs\cook_torrance_brdf.hpp" />
     <ClInclude Include="src\brdfs\oren_nayar_brdf.hpp" />
@@ -209,9 +208,9 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\materials\plastic_material.hpp" />
     <ClInclude Include="src\materials\transparent_material.hpp" />
     <ClInclude Include="src\objects\base_object.hpp" />
-    <ClInclude Include="src\objects\implicit_death_star.hpp" />
-    <ClInclude Include="src\objects\implicit_donut.hpp" />
-    <ClInclude Include="src\objects\implicit_infinite_cylinder.hpp" />
+    <ClInclude Include="src\objects\implicit_cylinder_infinite.hpp" />
+    <ClInclude Include="src\objects\implicit_torus.hpp" />
+    <ClInclude Include="src\objects\implicit_death_str.hpp" />
     <ClInclude Include="src\objects\implicit_surface.hpp" />
     <ClInclude Include="src\objects\plane.hpp" />
     <ClInclude Include="src\objects\sphere.hpp" />
@@ -219,8 +218,9 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\ray.hpp" />
     <ClInclude Include="src\renderer.hpp" />
     <ClInclude Include="src\scene.hpp" />
-    <ClInclude Include="src\texture.hpp" />
+    <ClInclude Include="src\textures\image_texture.hpp" />
     <ClInclude Include="src\textures\solid_color.hpp" />
+    <ClInclude Include="src\textures\texture.hpp" />
     <ClInclude Include="src\utils\chrono.hpp" />
     <ClInclude Include="src\utils\console_progress_bar.hpp" />
     <ClInclude Include="src\utils\file_path.hpp" />

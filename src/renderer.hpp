@@ -4,7 +4,7 @@
 #include "cameras/base_camera.hpp"
 #include "defines.hpp"
 #include "integrators/base_integrator.hpp"
-#include "texture.hpp"
+#include "textures/image_texture.hpp"
 #include "utils/chrono.hpp"
 
 namespace RT_ISICG
@@ -23,7 +23,7 @@ namespace RT_ISICG
 
 		inline void setNbPixelSamples( const int p_nbPixelSamples ) { _nbPixelSamples = p_nbPixelSamples; }
 
-		float renderImage( const Scene & p_scene, const BaseCamera * p_camera, Texture & p_texture );
+		float renderImage( const Scene & p_scene, const BaseCamera * p_camera, ImageTexture & p_texture );
 
 	  private:
 		BaseIntegrator * _integrator	 = nullptr;
