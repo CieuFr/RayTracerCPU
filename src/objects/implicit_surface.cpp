@@ -8,8 +8,9 @@ namespace RT_ISICG
 									 HitRecord & p_hitRecord ) const
 	{
 		float t = p_tMin;
-		for ( int i = 0; i < 10; i++ )
-		{
+
+		while (t <= p_tMax && t >= p_tMin) {
+
 			float distanceFromObject = _sdf( p_ray.pointAtT( t ) );
 
 			if ( abs( distanceFromObject ) < _minDistance )
@@ -21,11 +22,9 @@ namespace RT_ISICG
 				p_hitRecord._object	  = this;
 				return true;
 			}
-
 			t += abs( distanceFromObject );
-			if ( t > p_tMax ) return false;
-
 		}
+
 
 		return false;
 	}
@@ -33,19 +32,19 @@ namespace RT_ISICG
 	bool ImplicitSurface::intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const
 	{
 		float t = p_tMin;
-		for ( int i = 0; i < 10; i++ )
+
+		while ( t <= p_tMax && t >= p_tMin )
 		{
 			float distanceFromObject = _sdf( p_ray.pointAtT( t ) );
 
-			if ( abs(distanceFromObject) < _minDistance  )
+			if ( abs( distanceFromObject ) < _minDistance )
 			{
 				return true;
 			}
-
 			t += abs( distanceFromObject );
-			if ( t > p_tMax ) return false;
 		}
 
 		return false;
+
 	}
 } // namespace RT_ISICG

@@ -18,8 +18,11 @@ namespace RT_ISICG
 
 		float _sdf( const Vec3f & p_point ) const override
 		{
-			Vec2f q = Vec2f( length( Vec2f( _centre.x, _centre.z ) ) - _rayons.x, _centre.y );
-			return length( q ) - _rayons.y;
+			Vec3f p = p_point - _centre;
+			float x = glm::length( Vec2f( p.x, p.z ) ) - _rayons.x;
+			return length( Vec2f( x, p.y ) ) - _rayons.y;
+			
+			
 		}
 
 	  private:

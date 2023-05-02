@@ -18,7 +18,8 @@ namespace RT_ISICG
 
 		float _sdf( const Vec3f & p_point ) const override
 		{
-			return length( Vec2f( _centre.x, _centre.z ) - Vec2f( _cylinder.x, _cylinder.y ) ) - _cylinder.z;
+			Vec3f p = p_point - _centre;
+			return length( Vec2f( p.x, p.z ) - Vec2f( _cylinder.x, _cylinder.y ) ) - _cylinder.z;
 		}
 
 	  private:

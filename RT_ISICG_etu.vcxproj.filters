@@ -277,5 +277,8 @@
     <ClInclude Include="src\textures\texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\objects\implicit_box.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

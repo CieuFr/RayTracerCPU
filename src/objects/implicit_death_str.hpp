@@ -23,6 +23,7 @@ namespace RT_ISICG
 
 		float _sdf( const Vec3f & p_point ) const override
 		{
+			Vec3f pos = p_point - _centre;
 			// sampling independent computations (only depend on shape)
 			float a = ( _bigSphereRadius * _bigSphereRadius - _smallSphereRadius * _smallSphereRadius
 						+ _distanceBetweenSpheres * _distanceBetweenSpheres )
@@ -30,7 +31,7 @@ namespace RT_ISICG
 			float b = sqrt( glm::max( _bigSphereRadius * _bigSphereRadius - a * a, 0.f ) );
 
 			// sampling dependant computations
-			Vec2f p = Vec2f( _centre.x, length( Vec2f( _centre.y, _centre.z ) ) );
+			Vec2f p = Vec2f( pos.x, length( Vec2f( pos.y, pos.z ) ) );
 			if ( p.x * b - p.y * a > _distanceBetweenSpheres * glm::max( b - p.y, 0.f ) )
 				return length( p - Vec2f( a, b ) );
 			else
