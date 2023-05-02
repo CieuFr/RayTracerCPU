@@ -4,8 +4,6 @@
 #include "hit_record.hpp"
 #include "lights/light_sample.hpp"
 #include "ray.hpp"
-#include "textures/texture.hpp"
-#include "textures/solid_color.hpp"
 
 namespace RT_ISICG
 {
@@ -13,13 +11,7 @@ namespace RT_ISICG
 	{
 	  public:
 		BaseMaterial() = delete;
-		BaseMaterial( const std::string & p_name ) : _name( p_name ) { _texture = new SolidColorTexture(); }
-		BaseMaterial( const std::string & p_name, const Vec3f p_color ) : _name( p_name )
-		{
-			_texture = new SolidColorTexture( p_color );
-		}
-		BaseMaterial( const std::string & p_name, ImageTexture * p_texture ) : _name( p_name ), _texture( p_texture ) {}
-		
+		BaseMaterial( const std::string & p_name ) : _name( p_name ) {}
 		virtual ~BaseMaterial() = default;
 
 		virtual Vec3f shade( const Ray &		 p_ray,
@@ -38,7 +30,6 @@ namespace RT_ISICG
 
 	  protected:
 		std::string _name;
-		Texture *	_texture = nullptr;
 	};
 
 } // namespace RT_ISICG

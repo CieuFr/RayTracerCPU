@@ -482,7 +482,7 @@ int main( int argc, char ** argv )
 {
 	try
 	{
-		return RT_ISICG::mainTP7( argc, argv );
+		return RT_ISICG::mainProjet( argc, argv );
 	}
 	catch ( const std::exception & e )
 	{

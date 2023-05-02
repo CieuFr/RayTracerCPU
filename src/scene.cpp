@@ -6,6 +6,7 @@
 #include "materials/mirror_material.hpp"
 #include "materials/plastic_material.hpp"
 #include "materials/transparent_material.hpp"
+#include "materials/texture_material.hpp"
 #include "objects/plane.hpp"
 #include "objects/sphere.hpp"
 #include "objects/triangle_mesh.hpp"
@@ -14,7 +15,7 @@
 #include "objects/implicit_torus.hpp"
 #include "objects/implicit_cylinder_infinite.hpp"
 #include "objects/implicit_box.hpp"
-
+#include "textures/image_texture.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -224,7 +225,25 @@ namespace RT_ISICG
 	
 	}
 	void Scene::initProjet() {
-	
+
+		ImageTexture * wallTexture = new ImageTexture();
+		wallTexture->load( DATA_PATH + "textures/tree_wall_texture.jpg" );
+		wallTexture->saveJPG( RESULTS_PATH + "texturetest.jpg" );
+		
+		// Add objects.
+		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+
+		// Add materials.
+		_addMaterial( new TextureMaterial( "wall", wallTexture ) );
+		_addMaterial( new ColorMaterial( "Red", RED ) );
+
+		// Link objects and materials.
+		_attachMaterialToObject( "wall", "Sphere1" );
+		_attachMaterialToObject( "Red", "Plane1" );
+
+		// Add Lights
+		_addLight( new PointLight( Vec3f( 0.f, 5.f, -2.f ), WHITE, 60.f ) );
 	
 	}
 

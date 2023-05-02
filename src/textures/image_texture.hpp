@@ -5,6 +5,9 @@
 #include "textures/texture.hpp"
 #include <string>
 #include <vector>
+#include <algorithm>
+#include "stb/stb_image.h"
+#include "utils/file_path.hpp"
 
 namespace RT_ISICG
 {
@@ -12,12 +15,15 @@ namespace RT_ISICG
 	{
 	  public:
 		ImageTexture() = default;
+		//~ImageTexture() { stbi_image_free( _pixels.data() ); }
+		~ImageTexture() = default;
 		ImageTexture( const int p_width, const int p_height, const int _nbChannels = 3 )
 			: _width( p_width ), _height( p_height ), _pixels( _width * _height * _nbChannels, 0 )
 		{
 			_pixels.shrink_to_fit();
 		}
-		~ImageTexture() = default;
+			
+		
 
 		inline const int						  getWidth() const { return _width; }
 		inline const int						  getHeight() const { return _height; }
@@ -45,14 +51,16 @@ namespace RT_ISICG
 
 		void saveJPG( const std::string & p_path, const int p_quality = 100 );	   
 
+		bool load( const std::string & p_path );	
+
 		virtual Vec3f value(const Vec2f & p_uv, const Vec3f & p_point ) const override;
 
 	  private:
-		const int _nbChannels = 3;
+		int _nbChannels = 3;
 		int		  _width	  = 0;
 		int		  _height	  = 0;
-
 		std::vector<unsigned char> _pixels;
+		//unsigned char *data;
 	};
 
 } // namespace RT_ISICG
