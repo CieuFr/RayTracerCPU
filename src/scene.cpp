@@ -16,6 +16,7 @@
 #include "objects/implicit_cylinder_infinite.hpp"
 #include "objects/implicit_box.hpp"
 #include "textures/image_texture.hpp"
+#include "textures/checker_texture.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -226,16 +227,21 @@ namespace RT_ISICG
 	}
 	void Scene::initProjet() {
 
-		ImageTexture * wallTexture = new ImageTexture();
-		wallTexture->load( DATA_PATH + "textures/earthmap.jpg" );
+		ImageTexture * earthTexture = new ImageTexture();
+		earthTexture->load( DATA_PATH + "textures/earthmap.jpg" );
+
+		SolidColorTexture * redTexture = new SolidColorTexture( RED );
+		SolidColorTexture * whiteTexture = new SolidColorTexture( WHITE );
+		CheckerTexture *	checkerTexture = new CheckerTexture( whiteTexture, redTexture );
+
 		
 		// Add objects.
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		// Add materials.
-		_addMaterial( new TextureMaterial( "wall", wallTexture ) );
-		_addMaterial( new ColorMaterial( "Red", RED ) );
+		_addMaterial( new TextureMaterial( "wall", earthTexture ) );
+		_addMaterial( new TextureMaterial( "Red", checkerTexture ) );
 
 		// Link objects and materials.
 		_attachMaterialToObject( "wall", "Sphere1" );

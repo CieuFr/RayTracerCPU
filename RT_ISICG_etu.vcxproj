@@ -220,6 +220,7 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\ray.hpp" />
     <ClInclude Include="src\renderer.hpp" />
     <ClInclude Include="src\scene.hpp" />
+    <ClInclude Include="src\textures\checker_texture.hpp" />
     <ClInclude Include="src\textures\image_texture.hpp" />
     <ClInclude Include="src\textures\solid_color.hpp" />
     <ClInclude Include="src\textures\texture.hpp" />

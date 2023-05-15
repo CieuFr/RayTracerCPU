@@ -27,6 +27,8 @@ namespace RT_ISICG
 		
 		virtual bool intersectAny( const Ray & p_ray, const float p_tMin, const float p_tMax ) const override;
 
+		virtual const Vec2f getUV( const Vec3f & p_point ) const;
+
 	  private:
 		PlaneGeometry _geometry;
 	};
