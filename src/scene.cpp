@@ -227,8 +227,7 @@ namespace RT_ISICG
 	void Scene::initProjet() {
 
 		ImageTexture * wallTexture = new ImageTexture();
-		wallTexture->load( DATA_PATH + "textures/tree_wall_texture.jpg" );
-		wallTexture->saveJPG( RESULTS_PATH + "texturetest.jpg" );
+		wallTexture->load( DATA_PATH + "textures/earthmap.jpg" );
 		
 		// Add objects.
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );

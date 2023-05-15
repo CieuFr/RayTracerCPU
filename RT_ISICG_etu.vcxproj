@@ -229,6 +229,9 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\utils\image.hpp" />
     <ClInclude Include="src\utils\random.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Victor\Downloads\lion.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

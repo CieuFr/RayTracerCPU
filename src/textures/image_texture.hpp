@@ -60,7 +60,8 @@ namespace RT_ISICG
 		int		  _width	  = 0;
 		int		  _height	  = 0;
 		std::vector<unsigned char> _pixels;
-		//unsigned char *data;
+		unsigned char *			   _data = nullptr;
+		
 	};
 
 } // namespace RT_ISICG

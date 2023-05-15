@@ -3,7 +3,7 @@
 
 namespace RT_ISICG
 {
-	 
+	
 
 	void ImageTexture::saveJPG( const std::string & p_path, const int p_quality )
 	{
@@ -12,36 +12,28 @@ namespace RT_ISICG
 
 	bool ImageTexture::load( const std::string & p_path )
 	{
-		unsigned char * pix = nullptr;
-		pix					= stbi_load( p_path.c_str(), &_width, &_height, &_nbChannels, 0 );
-		if ( pix == nullptr )
+		_data					= stbi_load( p_path.c_str(), &_width, &_height, &_nbChannels, 0 );
+		if ( _data == nullptr )
 		{
 			std::cerr << "[ERROR] - Failed to load texture " << p_path << std::endl;
 			std::cerr << "=> " << stbi_failure_reason << std::endl;
 		}
+		std::cout << "load file " << std::endl;
 
-		if ( pix != nullptr )
-		{
-			const size_t numBytes = sizeof( pix );
-
-			std::vector<unsigned char> _pixels( numBytes );
-			std::copy( pix, pix + numBytes, _pixels.begin() );
-		}
-		return pix != nullptr;
+		return _data != nullptr;
 	}
 
 
 	Vec3f ImageTexture::value( const Vec2f & p_uv, const Vec3f & p_point ) const { 
 
 		const static int bytes_per_pixel = 3;
-		const static int bytes_per_scanline				 = bytes_per_pixel * _width;
-
+		const static int bytes_per_scanline = bytes_per_pixel * _width;
 		// If we have no texture data, then return solid cyan as a debugging aid.
-		if ( _pixels.data() == nullptr ) return Vec3f( 0, 1, 1 );
+		if ( _data == nullptr ) return Vec3f( 0, 1, 1 );
 
 		// Clamp input texture coordinates to [0,1] x [1,0]
 		float u = glm::clamp( p_uv.x, 0.0f, 1.0f );
-		float v = 1.0 - glm::clamp( p_uv.y, 0.0f, 1.0f ); // Flip V to image coordinates
+		 float v = 1.0 - glm::clamp( p_uv.y, 0.0f, 1.0f ); // Flip V to image coordinates
 
 		auto i = static_cast<int>( u * _width );
 		auto j = static_cast<int>( v * _height );
@@ -51,10 +43,9 @@ namespace RT_ISICG
 		if ( j >= _height ) j = _height - 1;
 
 		const auto color_scale = 1.0 / 255.0;
-		auto	   pixel	   = _pixels.data() + j * bytes_per_scanline + i * bytes_per_pixel;
+		auto	   pixel	   = _data + j * bytes_per_scanline + i * bytes_per_pixel;
 
 		return Vec3f( color_scale * pixel[ 0 ], color_scale * pixel[ 1 ], color_scale * pixel[ 2 ] );
-
 
 	}
 	

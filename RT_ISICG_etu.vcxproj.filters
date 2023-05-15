@@ -284,4 +284,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Victor\Downloads\lion.png" />
+  </ItemGroup>
 </Project>
