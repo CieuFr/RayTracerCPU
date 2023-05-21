@@ -105,7 +105,7 @@ namespace RT_ISICG
 			}
 		}
 
-		static float perlin_interp( Vec3f p_c[ 2 ][ 2 ][ 2 ], float p_u, float p_v, float p_w )
+		static float perlin_interp( Vec3f p_c[ 2 ][ 2 ][ 2 ], float p_u, float p_v, float p_w ) 
 		{
 			auto uu	   = p_u * p_u * ( 3 - 2 * p_u );
 			auto vv	   = p_v * p_v * ( 3 - 2 * p_v );

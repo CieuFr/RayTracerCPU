@@ -116,12 +116,6 @@ namespace RT_ISICG
 		// = = = = = = = = = Add lights . = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		_addLight( new PointLight( Vec3f( 0.f, 3.f, -5.f ), WHITE, 100.f ) );
 	}
-	void Scene::initTP4Conference()
-	{
-		loadFileTriangleMesh( "Conference", DATA_PATH + "/conference/conference.obj" );
-		
-		_addLight( new QuadLight( Vec3f( 900, 600, -300 ), Vec3f( -800, 0, 0 ), Vec3f( 0, 0, 300 ), WHITE, 20.f ) );
-	}
 	void Scene::initTP5()
 	{
 		// Add objects.

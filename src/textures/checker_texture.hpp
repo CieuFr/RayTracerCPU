@@ -15,8 +15,10 @@ namespace RT_ISICG
 	{
 	  public:
 		CheckerTexture() = default;
-		//~ImageTexture() { stbi_image_free( _pixels.data() ); }
-		~CheckerTexture() = default;
+		~CheckerTexture() { 
+			delete _even;
+			delete _odd;
+		}
 		CheckerTexture( Texture * p_even, Texture * p_odd ) : _even( p_even ), _odd( p_odd ) {}
 
 
