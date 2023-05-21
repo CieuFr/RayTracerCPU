@@ -122,22 +122,25 @@ namespace RT_ISICG
 	void Scene::initTP5()
 	{
 		// Add objects.
-		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
+		_addObject( new Sphere( "Sphere1", Vec3f( -3.f, 3.f, 0.f ), 1.f ) );
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
-
+		_addObject( new Sphere( "Sphere2", Vec3f( 3.f, 3.f, 0.f ), 1.f ) );
+		loadFileTriangleMesh( "Bunny", DATA_PATH + "Bunny.obj" );
 		// Add materials.
 		_addMaterial( new PlasticMaterial( "GreyPlastic", GREY, 8.f ) );
 		_addMaterial( new PlasticMaterial( "RedPlastic", RED, 8.f ) );
-
-		/*_addMaterial( new MetalMaterial( "GoldenBunny",  Vec3f( 1.f, 0.85f, 0.57f ), 0.3f, 0.5f, Vec3f( 1.f, 0.85f,
-		0.57f ))); _addMaterial( new MetalMaterial( "RedMetal", RED, 0.3f, 0.5f, Vec3f( 1.f, 0.85f, 0.57f ) ) );*/
-
+		_addMaterial( new MatteMaterial( "BlueMatte", BLUE, 0.4f ) );
+		_addMaterial( new MetalMaterial( "GoldenBunny",  YELLOW, 0.3f, 0.5f, Vec3f( 1.f, 0.85f,
+		0.57f ))); 
+		
 		// Link objects and materials.
 		_attachMaterialToObject( "GreyPlastic", "Sphere1" );
 		_attachMaterialToObject( "RedPlastic", "Plane1" );
+		_attachMaterialToObject( "BlueMatte", "Sphere2" );
+		_attachMaterialToObject( "GoldenBunny", "Bunny_defaultobject");
 
 		// Add Lights
-		_addLight( new PointLight( Vec3f( 0.f, 0.f, -2.f ), WHITE, 60.f ) );
+		_addLight( new PointLight( Vec3f( 0.f, 5.f, -6.f ), WHITE, 250.f ) );
 
 	}
 	void Scene::initTP6()

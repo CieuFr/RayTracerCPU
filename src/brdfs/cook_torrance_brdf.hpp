@@ -19,7 +19,7 @@ namespace RT_ISICG
 		
 		inline const float D( const Vec3f & p_h, const Vec3f & p_n ) const { 
 			float alpha = _sigma * _sigma;
-			return (alpha / (PIf*pow(pow(dot(p_n,p_h),2.f)*(alpha*alpha-1.f)+1.f,2.f)));
+			return (alpha*alpha / (PIf*pow(pow(dot(p_n,p_h),2.f)*(alpha*alpha-1.f)+1.f,2.f)));
 		}
 
 		inline const float G( const float x ) const {

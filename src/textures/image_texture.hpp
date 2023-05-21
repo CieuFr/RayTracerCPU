@@ -22,7 +22,7 @@ namespace RT_ISICG
 		{
 			_pixels.shrink_to_fit();
 		}
-			
+		
 		
 
 		inline const int						  getWidth() const { return _width; }
@@ -53,14 +53,23 @@ namespace RT_ISICG
 
 		bool load( const std::string & p_path );	
 
-		virtual Vec3f value(const Vec2f & p_uv, const Vec3f & p_point ) const override;
+		virtual Vec3f value(const Vec2f & p_uv, const Vec3f & p_point ) const override;		
 
 	  private:
 		int _nbChannels = 3;
 		int		  _width	  = 0;
 		int		  _height	  = 0;
+
+		// if false : nearest 
+		bool bilinearFiltering = true;
+		
+		// Duplication des données à ce niveau car je n'ai pas réussi à faire fonctionner stbi avec les vectors
+		// J'ai gardé le code pour l'image de sortie dans la variable _pixels
+		// et les textures sont dans la variable _data
 		std::vector<unsigned char> _pixels;
 		unsigned char *			   _data = nullptr;
+
+		
 		
 	};
 

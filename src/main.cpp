@@ -271,7 +271,7 @@ namespace RT_ISICG
 
 		scene.initTP5();
 
-		Vec3f position = Vec3f( 0, 0, 0 );
+		Vec3f position = Vec3f( 0, 2, -6 );
 		Vec3f lookAt   = Vec3f( 0, 0, 79 );
 		Vec3f up	   = Vec3f( 0, 1, 0 );
 		float fovy	   = 60;
@@ -482,7 +482,7 @@ int main( int argc, char ** argv )
 {
 	try
 	{
-		return RT_ISICG::mainProjet( argc, argv );
+		return RT_ISICG::mainTP5( argc, argv );
 	}
 	catch ( const std::exception & e )
 	{
