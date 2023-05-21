@@ -19,6 +19,17 @@ namespace RT_ISICG
 		BaseIntegrator * getIntegrator() { return _integrator; }
 		void			 setBackgroundColor( const Vec3f & p_color );
 		void			 setNumberOfLightSamples( const int & p_numberOfLightSamples );
+		
+		Vec3f			 Tonemap_ACES( const Vec3f p_color )
+		{
+			// Narkowicz 2015, "ACES Filmic Tone Mapping Curve"
+			const float a = 2.51f;
+			const float b = 0.03f;
+			const float c = 2.43f;
+			const float d = 0.59f;
+			const float e = 0.14f;
+			return ( p_color * ( a * p_color + b ) ) / ( p_color * ( c * p_color + d ) + e );
+		}
 
 
 		inline void setNbPixelSamples( const int p_nbPixelSamples ) { _nbPixelSamples = p_nbPixelSamples; }

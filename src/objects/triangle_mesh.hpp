@@ -49,8 +49,6 @@ namespace RT_ISICG
 
 		inline void buildMeshBVH() { _bvh.build( &_triangles ); };
 
-		virtual const Vec2f getUV( const Vec3f & p_point ) const;
-
 	  private:
 		std::vector<Vec3f>				  _vertices;
 		std::vector<Vec3f>				  _normals;

@@ -17,6 +17,8 @@
 #include "objects/implicit_box.hpp"
 #include "textures/image_texture.hpp"
 #include "textures/checker_texture.hpp"
+#include "textures/noise_texture.hpp"
+
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
@@ -117,7 +119,8 @@ namespace RT_ISICG
 	void Scene::initTP4Conference()
 	{
 		loadFileTriangleMesh( "Conference", DATA_PATH + "/conference/conference.obj" );
-		_addLight( new QuadLight( Vec3f( 900, 600, -300 ), Vec3f( -800, 0, 0 ), Vec3f( 0, 0, 300 ), WHITE, 40.f ) );
+		
+		_addLight( new QuadLight( Vec3f( 900, 600, -300 ), Vec3f( -800, 0, 0 ), Vec3f( 0, 0, 300 ), WHITE, 20.f ) );
 	}
 	void Scene::initTP5()
 	{
@@ -201,7 +204,6 @@ namespace RT_ISICG
 		_addObject( new ImplicitInfiniteCylinder( "Cylinder", Vec3f( 1.5f, -1.f, 2.f ), Vec3f( 0.5f, 0.2f,0.1f ) ) );
 		_addObject( new ImplicitDeathStar( "Death", Vec3f( 1.f, -0.5f, 2.f ),0.7f,0.5f,0.5f ));
 
-		
 		// Add materials.
 		_addMaterial( new ColorMaterial( "Blue", BLUE ) );
 		_addMaterial( new ColorMaterial( "Red", RED ) );
@@ -209,21 +211,14 @@ namespace RT_ISICG
 		_addMaterial( new ColorMaterial( "Yellow", YELLOW ) );
 		_addMaterial( new ColorMaterial( "Cyan", CYAN ) );
 
-
 		// Link objects and materials.
 		_attachMaterialToObject( "Blue", "Box" );
 		_attachMaterialToObject( "Red", "Sphere1" );
 		_attachMaterialToObject( "Green", "Donut" );
 		_attachMaterialToObject( "Yellow", "Cylinder" );
 		_attachMaterialToObject( "Cyan", "Death" );
-
-
-
-
-
 		// Add Lights
 		
-
 		_addLight( new PointLight( Vec3f( 0.f, 5.f, -2.f ), WHITE, 60.f ) );
 		
 	
@@ -231,27 +226,36 @@ namespace RT_ISICG
 	void Scene::initProjet() {
 
 		ImageTexture * earthTexture = new ImageTexture();
-		earthTexture->load( DATA_PATH + "textures/earthmap.jpg" );
+		earthTexture->load( DATA_PATH + "textures/mars.jpg" );
 
-		SolidColorTexture * redTexture = new SolidColorTexture( RED );
+		// CHECKER TEXTURE 
+		SolidColorTexture * redTexture = new SolidColorTexture( BLACK );
 		SolidColorTexture * whiteTexture = new SolidColorTexture( WHITE );
 		CheckerTexture *	checkerTexture = new CheckerTexture( whiteTexture, redTexture );
-
+		
+		// NOISE TEXTURE 
+		NoiseTexture * noiseTexture = new NoiseTexture(0.5f);
+		
 		
 		// Add objects.
 		_addObject( new Sphere( "Sphere1", Vec3f( 0.f, 0.f, 3.f ), 1.f ) );
-		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
-
+		_addObject( new Plane( "Plane1", Vec3f( 0.f, -1.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
+		_addObject( new ImplicitBox( "Box", Vec3f( -3.f, 0.f, 4.f ), 1.f , Vec3f(0.f,40.f,0.f) ));
+		
 		// Add materials.
-		_addMaterial( new TextureMaterial( "wall", earthTexture ) );
-		_addMaterial( new TextureMaterial( "Red", checkerTexture ) );
-
+		_addMaterial( new TextureMaterial( "mars", earthTexture ) );
+		_addMaterial( new TextureMaterial( "checker", checkerTexture ) );
+		_addMaterial( new TextureMaterial( "noise", noiseTexture ) );
+		
 		// Link objects and materials.
-		_attachMaterialToObject( "wall", "Sphere1" );
-		_attachMaterialToObject( "Red", "Plane1" );
 
+		_attachMaterialToObject( "noise", "Box" );
+		_attachMaterialToObject( "mars", "Sphere1" );
+		_attachMaterialToObject( "checker", "Plane1" );
+
+		
 		// Add Lights
-		_addLight( new PointLight( Vec3f( 0.f, 5.f, -2.f ), WHITE, 60.f ) );
+		_addLight( new QuadLight( Vec3f( 10.f, 10.f, -10.f ), Vec3f( -5.f, 0.f, 0.f ), Vec3f( 0.f, 0.f, 5.f ), WHITE, 30.f ) );
 	
 	}
 

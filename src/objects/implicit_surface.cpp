@@ -47,4 +47,32 @@ namespace RT_ISICG
 		return false;
 
 	}
+
+	Mat3f ImplicitSurface::rotateX( float p_theta ) const
+	{
+		float c = cos( p_theta );
+		float s = sin( p_theta );
+		return Mat3f( Vec3f( 1, 0, 0 ), Vec3f( 0, c, -s ), Vec3f( 0, s, c ) );
+	}
+
+	// Rotation matrix around the Y axis.
+	Mat3f ImplicitSurface::rotateY( float p_theta ) const
+	{
+		float c = cos( p_theta );
+		float s = sin( p_theta );
+		return Mat3f( Vec3f( c, 0, s ), Vec3f( 0, 1, 0 ), Vec3f( -s, 0, c ) );
+	}
+
+	// Rotation matrix around the Z axis.
+	Mat3f ImplicitSurface::rotateZ( float p_theta ) const
+	{
+		float c = cos( p_theta );
+		float s = sin( p_theta );
+		return Mat3f( Vec3f( c, -s, 0 ), Vec3f( s, c, 0 ), Vec3f( 0, 0, 1 ) );
+	}
+
+	// Identity matrix.
+	Mat3f ImplicitSurface::identity() { return Mat3f( Vec3f( 1, 0, 0 ), Vec3f( 0, 1, 0 ), Vec3f( 0, 0, 1 ) ); }
+
+
 } // namespace RT_ISICG

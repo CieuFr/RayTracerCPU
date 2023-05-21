@@ -222,10 +222,9 @@ namespace RT_ISICG
 		scene.initTP4Conference();
 
 		Vec3f position = Vec3f( -250, 500, 330 );
-		Vec3f lookAt   = Vec3f( 0, 350, 100 );
+		Vec3f lookAt   = Vec3f( 0, 350,100 );
 		Vec3f up	   = Vec3f( 0, 1, 0 );
 		float fovy	   = 60;
-
 		// Create a perspective camera.
 		PerspectiveCamera camera( position, lookAt, up, fovy, float( imgWidth ) / imgHeight );
 
@@ -442,8 +441,8 @@ namespace RT_ISICG
 
 		scene.initProjet();
 
-		Vec3f position = Vec3f( 0, 0, -1 );
-		Vec3f lookAt   = Vec3f( 0, 0, 79 );
+		Vec3f position = Vec3f( 0, 3, -1 );
+		Vec3f lookAt   = Vec3f( 0, 0, 10 );
 		Vec3f up	   = Vec3f( 0, 1, 0 );
 		float fovy	   = 60;
 
@@ -482,7 +481,7 @@ int main( int argc, char ** argv )
 {
 	try
 	{
-		return RT_ISICG::mainTP5( argc, argv );
+		return RT_ISICG::mainProjet( argc, argv );
 	}
 	catch ( const std::exception & e )
 	{

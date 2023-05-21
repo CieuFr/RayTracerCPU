@@ -15,7 +15,6 @@ namespace RT_ISICG
 	{
 	  public:
 		ImageTexture() = default;
-		//~ImageTexture() { stbi_image_free( _pixels.data() ); }
 		~ImageTexture() = default;
 		ImageTexture( const int p_width, const int p_height, const int _nbChannels = 3 )
 			: _width( p_width ), _height( p_height ), _pixels( _width * _height * _nbChannels, 0 )
@@ -24,7 +23,6 @@ namespace RT_ISICG
 		}
 		
 		
-
 		inline const int						  getWidth() const { return _width; }
 		inline const int						  getHeight() const { return _height; }
 		inline std::vector<unsigned char> &		  getPixels() { return _pixels; }

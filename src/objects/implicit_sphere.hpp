@@ -16,7 +16,10 @@ namespace RT_ISICG
 		{
 		}
 
-	    float _sdf( const Vec3f & p_point ) const  override { return glm::length( p_point - _centre ) - _rayon; }
+	    float _sdf( const Vec3f & p_point) const override
+		{
+			return glm::length( p_point - _centre ) - _rayon;
+		}
 
 	  private:
 		// Signed Distance Function

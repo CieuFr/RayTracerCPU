@@ -81,6 +81,8 @@ namespace RT_ISICG
 		if ( p_node->isLeaf() )
 		{
 			float tClosest = p_tMax;
+			float u;
+			float v;
 			if ( p_hitRecord._object != nullptr ) { tClosest = p_hitRecord._distance; }
 
 			size_t hitTri		 = _triangles->size(); // Hit triangle id.
@@ -88,9 +90,10 @@ namespace RT_ISICG
 			for ( size_t i = p_node->_firstTriangleId; i < p_node->_lastTriangleId; i++ )
 			{
 				float t;
+				
 				Vec3f n;
 
-				if ( _triangles->at( i ).intersect( p_ray, t, n ) )
+				if ( _triangles->at( i ).intersect( p_ray, t, n,u,v ) )
 				{
 					if ( t >= p_tMin && t <= tClosest )
 					{
@@ -105,6 +108,7 @@ namespace RT_ISICG
 				p_hitRecord._point	= p_ray.pointAtT( tClosest );
 				p_hitRecord._normal = normalClosest;
 				p_hitRecord.faceNormal( p_ray.getDirection() );
+				p_hitRecord._uv		  = Vec2f( u, v );
 				p_hitRecord._distance = tClosest;
 				p_hitRecord._object	  = reinterpret_cast<BaseObject *>( _triangles->at( hitTri ).getRefMesh() );
 
@@ -140,10 +144,12 @@ namespace RT_ISICG
 		if ( p_node->isLeaf() )
 		{
 			Vec3f normal;
+			float u;
+			float v;
 			for ( size_t i = p_node->_firstTriangleId; i < p_node->_lastTriangleId; i++ )
 			{
 				float t;
-				if ( _triangles->at( i ).intersect( p_ray, t, normal ) )
+				if ( _triangles->at( i ).intersect( p_ray, t, normal,u,v ) )
 				{
 					if ( t >= p_tMin && t <= p_tMax ) return true; // No need to search for the nearest.
 				}

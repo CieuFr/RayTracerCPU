@@ -46,6 +46,8 @@ namespace RT_ISICG
 		if ( _integrator == nullptr ) { std::cout << "[Renderer::setNumberOfLightSamples] Integrator is null" << std::endl; }
 		else { _integrator->setNbLightSample( p_numberOfLightSamples ); }
 	}
+	
+	
 
 
 	float Renderer::renderImage( const Scene & p_scene, const BaseCamera * p_camera, ImageTexture & p_texture )
@@ -79,6 +81,7 @@ namespace RT_ISICG
 
 				colorMean = colorMean / (float)_nbPixelSamples;
 				colorMean = glm::clamp( colorMean, 0.f, 1.f );
+				colorMean = Tonemap_ACES( colorMean );
 				p_texture.setPixel( i, j, colorMean );
 			}
 			progressBar.next();

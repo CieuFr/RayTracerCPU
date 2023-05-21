@@ -122,9 +122,6 @@
     <ClCompile Include="src\objects\implicit_sphere.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ray_differential.hpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\utils\image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -286,8 +283,11 @@
     <ClInclude Include="src\textures\checker_texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="C:\Users\Victor\Downloads\lion.png" />
+    <ClInclude Include="src\textures\noise_texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\textures\perlin_noise.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

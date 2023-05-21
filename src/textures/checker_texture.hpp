@@ -21,7 +21,7 @@ namespace RT_ISICG
 
 
 		virtual Vec3f value(const Vec2f& p_uv, const Vec3f& p_point) const override {
-			float sines = sin( 10 * p_point.x ) * sin( 10 * p_point.y ) * sin( 10 * p_point.z );
+			float sines = sin( 5 * p_point.x ) * sin( 5 * p_point.y ) * sin( 5 * p_point.z );
 			if ( sines < 0 )
 				return _odd->value( p_uv, p_point );
 			else

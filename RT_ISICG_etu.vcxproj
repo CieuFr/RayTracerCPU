@@ -169,7 +169,6 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClCompile Include="src\objects\plane.cpp" />
     <ClCompile Include="src\objects\sphere.cpp" />
     <ClCompile Include="src\objects\triangle_mesh.cpp" />
-    <ClCompile Include="src\ray_differential.hpp" />
     <ClCompile Include="src\renderer.cpp" />
     <ClCompile Include="src\scene.cpp" />
     <ClCompile Include="src\textures\image_texture.cpp" />
@@ -222,6 +221,8 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\scene.hpp" />
     <ClInclude Include="src\textures\checker_texture.hpp" />
     <ClInclude Include="src\textures\image_texture.hpp" />
+    <ClInclude Include="src\textures\noise_texture.hpp" />
+    <ClInclude Include="src\textures\perlin_noise.hpp" />
     <ClInclude Include="src\textures\solid_color.hpp" />
     <ClInclude Include="src\textures\texture.hpp" />
     <ClInclude Include="src\utils\chrono.hpp" />
@@ -229,9 +230,6 @@ xcopy /y /d  "$(ProjectDir)lib\zlib1.dll" "$(OutDir)"</Command>
     <ClInclude Include="src\utils\file_path.hpp" />
     <ClInclude Include="src\utils\image.hpp" />
     <ClInclude Include="src\utils\random.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="C:\Users\Victor\Downloads\lion.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
