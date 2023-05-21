@@ -197,6 +197,7 @@ namespace RT_ISICG
 	{
 
 		_addObject( new ImplicitSphere( "Sphere1", Vec3f( -1.5f, 0.5f, 5.f ), 1.f ) );
+		_addObject( new ImplicitSphere( "Sphere2", Vec3f( -1.5f, 0.5f, 7.f ), 1.f ) );
 		_addObject( new Plane( "Plane1", Vec3f( 0.f, -2.f, 0.f ), Vec3f( 0.f, 1.f, 0.f ) ) );
 
 		_addObject( new ImplicitBox( "Box", Vec3f( 1.f, 0.5f, 5.f ), 1.f ) );
@@ -214,6 +215,8 @@ namespace RT_ISICG
 		// Link objects and materials.
 		_attachMaterialToObject( "Blue", "Box" );
 		_attachMaterialToObject( "Red", "Sphere1" );
+		_attachMaterialToObject( "Blue", "Sphere2" );
+		
 		_attachMaterialToObject( "Green", "Donut" );
 		_attachMaterialToObject( "Yellow", "Cylinder" );
 		_attachMaterialToObject( "Cyan", "Death" );

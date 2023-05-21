@@ -34,7 +34,7 @@ namespace RT_ISICG
 			delete[] _perm_z;
 		}
 
-		double noise( const Vec3f & p_point ) const
+		float noise( const Vec3f & p_point ) const
 		{
 			auto u = p_point.x - floor( p_point.x );
 			auto v = p_point.y - floor( p_point.y );
@@ -66,8 +66,8 @@ namespace RT_ISICG
 			for ( int i = 0; i < p_depth; i++ )
 			{
 				accum += weight * noise( temp_p );
-				weight *= 0.5;
-				temp_p *= 2;
+				weight *= 0.5f;
+				temp_p *= 2.f;
 			}
 
 			return fabs( accum );
@@ -105,12 +105,12 @@ namespace RT_ISICG
 			}
 		}
 
-		static double perlin_interp( Vec3f p_c[ 2 ][ 2 ][ 2 ], double p_u, double p_v, double p_w )
+		static float perlin_interp( Vec3f p_c[ 2 ][ 2 ][ 2 ], float p_u, float p_v, float p_w )
 		{
 			auto uu	   = p_u * p_u * ( 3 - 2 * p_u );
 			auto vv	   = p_v * p_v * ( 3 - 2 * p_v );
 			auto ww	   = p_w * p_w * ( 3 - 2 * p_w );
-			auto accum = 0.0;
+			auto accum = 0.0f;
 
 			for ( int i = 0; i < 2; i++ )
 				for ( int j = 0; j < 2; j++ )

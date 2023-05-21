@@ -33,7 +33,7 @@ namespace RT_ISICG
 
 		// Clamp input texture coordinates to [0,1] x [1,0]
 		float u = glm::clamp( p_uv.x, 0.0f, 1.0f );
-		float v = 1.0 - glm::clamp( p_uv.y, 0.0f, 1.0f ); // Flip V to image coordinates
+		float v = 1.0f - glm::clamp( p_uv.y, 0.0f, 1.0f ); // Flip V to image coordinates
 
 
 		if (bilinearFiltering) {
@@ -42,13 +42,13 @@ namespace RT_ISICG
 			float j = v * _height;
 
 			// Clamp integer mapping, since actual coordinates should be less than 1.0
-			if ( i >= _width ) i = _width - 1;
-			if ( j >= _height ) j = _height - 1;
+			if ( i >= _width ) i = _width - 1.f;
+			if ( j >= _height ) j = _height - 1.f;
 
-			int	  iUp	= std::ceil( i );
-			int	  iDown = std::floor( i );
-			int	  jUp	= std::ceil( j );
-			int	  jDown = std::floor( j );
+			int	  iUp	= int(std::ceil( i ));
+			int	  iDown = int(std::floor( i ));
+			int	  jUp	= int(std::ceil( j ));
+			int	  jDown = int(std::floor( j ));
 			float iFrac = i - iDown;
 			float jFrac = j - jDown;
 

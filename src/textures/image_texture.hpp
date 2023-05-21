@@ -32,19 +32,19 @@ namespace RT_ISICG
 		{
 			assert( _nbChannels == 3 );
 			const int pixelId	   = ( p_i + p_j * _width ) * _nbChannels;
-			_pixels[ pixelId ]	   = static_cast<unsigned char>( p_color.r * 255 );
-			_pixels[ pixelId + 1 ] = static_cast<unsigned char>( p_color.g * 255 );
-			_pixels[ pixelId + 2 ] = static_cast<unsigned char>( p_color.b * 255 );
+			_pixels[ pixelId ]	   = static_cast<unsigned char>( p_color.r * 255.f );
+			_pixels[ pixelId + 1 ] = static_cast<unsigned char>( p_color.g * 255.f );
+			_pixels[ pixelId + 2 ] = static_cast<unsigned char>( p_color.b * 255.f );
 		}
 
 		void setPixel( const int p_i, const int p_j, const Vec4f & p_color )
 		{
 			assert( _nbChannels == 4 );
 			const int pixelId	   = ( p_i + p_j * _width ) * _nbChannels;
-			_pixels[ pixelId ]	   = static_cast<unsigned char>( p_color.r * 255 );
-			_pixels[ pixelId + 1 ] = static_cast<unsigned char>( p_color.g * 255 );
-			_pixels[ pixelId + 2 ] = static_cast<unsigned char>( p_color.b * 255 );
-			_pixels[ pixelId + 3 ] = static_cast<unsigned char>( p_color.a * 255 );
+			_pixels[ pixelId ]	   = static_cast<unsigned char>( p_color.r * 255.f );
+			_pixels[ pixelId + 1 ] = static_cast<unsigned char>( p_color.g * 255.f );
+			_pixels[ pixelId + 2 ] = static_cast<unsigned char>( p_color.b * 255.f );
+			_pixels[ pixelId + 3 ] = static_cast<unsigned char>( p_color.a * 255.f );
 		}
 
 		void saveJPG( const std::string & p_path, const int p_quality = 100 );	   
